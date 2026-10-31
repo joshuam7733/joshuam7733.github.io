@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Joshua Magembe</title>
+<meta name="description" content="Software built in Kampala: restaurant operations, a job portal, a delivery platform, a gaming platform and more.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314281F'/%3E%3Crect x='7' y='17' width='18' height='7' fill='%23E8A317'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='800' font-size='17' text-anchor='middle' fill='%23F3F5EF'%3EJM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F3F5EF;
+    --ink: #14281F;
+    --ink-soft: #4A5D53;
+    --leaf: #3D6B4F;
+    --mango: #E8A317;
+    --rule: #CBD5C9;
+    --focus: #1F6FEB;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #12201A;
+      --ink: #E9EFE6;
+      --ink-soft: #A7B8AD;
+      --leaf: #8CC2A0;
+      --mango: #E8A317;
+      --rule: #2B3D34;
+      --focus: #7FB2FF;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #12201A;
+    --ink: #E9EFE6;
+    --ink-soft: #A7B8AD;
+    --leaf: #8CC2A0;
+    --mango: #E8A317;
+    --rule: #2B3D34;
+    --focus: #7FB2FF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    font-optical-sizing: auto;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+  }
+  a { color: inherit; }
+  a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: 72rem; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 3rem); }
+
+  /* Masthead */
+  .masthead {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    padding-top: clamp(1.25rem, 3vw, 2rem);
+  }
+  .masthead .name { font-weight: 700; font-size: 1.0625rem; letter-spacing: -0.01em; text-decoration: none; }
+  .masthead nav { display: flex; gap: 1.25rem; font-size: 0.95rem; }
+  .masthead nav a { color: var(--ink-soft); text-decoration: none; }
+  .masthead nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Hero: the one bold moment */
+  .hero { padding: clamp(4rem, 12vw, 9rem) 0 clamp(3.5rem, 9vw, 7rem); }
+  .hero h1 {
+    margin: 0;
+    max-width: 15ch;
+    font-size: clamp(2.6rem, 8.2vw, 6.6rem);
+    line-height: 0.98;
+    font-weight: 750;
+    font-stretch: 78%;
+    letter-spacing: -0.035em;
+  }
+  .hero h1 a {
+    position: relative;
+    text-decoration: none;
+    white-space: nowrap;
+    z-index: 0;
+  }
+  .hero h1 a::before {
+    content: "";
+    position: absolute; z-index: -1;
+    left: -0.06em; right: -0.06em; bottom: 0.06em; height: 0.36em;
+    background: var(--mango);
+    transform-origin: left center;
+    animation: swipe 520ms cubic-bezier(.2,.7,.2,1) both;
+  }
+  .hero h1 a:nth-of-type(2)::before { animation-delay: 140ms; }
+  .hero h1 a:nth-of-type(3)::before { animation-delay: 280ms; }
+  .hero h1 a:nth-of-type(4)::before { animation-delay: 420ms; }
+  .hero h1 a:hover { color: #14281F; }
+  .hero h1 a:hover::before { height: 0.86em; transition: height 160ms ease-out; }
+  @keyframes swipe { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero h1 a::before { animation: none; }
+    .hero h1 a:hover::before { transition: none; }
+  }
+
+  .hero p {
+    margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+    max-width: 38rem;
+    color: var(--ink-soft);
+    font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+  }
+
+  /* Work index */
+  .group { padding-bottom: clamp(2.5rem, 6vw, 4.5rem); }
+  .group h2 {
+    margin: 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--ink);
+    font-size: 1.0625rem;
+    font-weight: 700;
+  }
+  .group h2 span { color: var(--ink-soft); font-weight: 400; }
+
+  .project {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 0.5rem clamp(1.5rem, 4vw, 3.5rem);
+    padding: clamp(1.5rem, 3vw, 2.25rem) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .project h3 {
+    margin: 0;
+    font-size: clamp(1.9rem, 4.2vw, 3.1rem);
+    line-height: 1;
+    font-weight: 700;
+    font-stretch: 82%;
+    letter-spacing: -0.025em;
+  }
+  .project .where { margin: 0.6rem 0 0; color: var(--ink-soft); font-size: 0.95rem; }
+  .project .what { margin: 0; max-width: 34rem; }
+  .project .stack { margin: 0.75rem 0 0; color: var(--leaf); font-size: 0.95rem; }
+  .project .code {
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: 600;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--mango);
+  }
+  .project .code:hover { text-decoration-color: var(--ink); }
+
+  footer {
+    border-top: 2px solid var(--ink);
+    padding: 1.5rem 0 3rem;
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem;
+    color: var(--ink-soft); font-size: 0.95rem;
+  }
+
+  @media (max-width: 680px) {
+    .project { grid-template-columns: 1fr; }
+    .masthead nav { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <a class="name" href="#top" id="top">Joshua Magembe</a>
+    <nav aria-label="Main">
+      <a href="#work">Work</a>
+      <a href="https://github.com/joshuam7733">GitHub</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>I build software for how Kampala <a href="#zawli">eats</a>, <a href="#kazi">works</a>, <a href="#dropoff">moves</a> and <a href="#stackd">plays</a>.</h1>
+    <p>Restaurant operations, hiring, deliveries and competitive gaming, designed for Ugandan businesses, mobile money and the phones people actually carry. Every project below is open source.</p>
+  </section>
+
+  <main id="work">
+    <section class="group" aria-labelledby="g-products">
+      <h2 id="g-products">Products <span>(4)</span></h2>
+
+      <article class="project" id="zawli">
+        <div>
+          <h3>Zawli</h3>
+          <p class="where">Restaurant operations platform</p>
+        </div>
+        <div>
+          <p class="what">Customers order from a QR code at their table. The kitchen sees orders live and prints tickets, waiters get a floor screen, and owners get payments and reports. Many restaurants run on one system, each kept completely separate.</p>
+          <p class="stack">Next.js, TypeScript, Prisma, PostgreSQL, Better Auth, Playwright</p>
+          <a class="code" href="https://github.com/joshuam7733/zawli">View code on GitHub</a>
+        </div>
+      </article>
+
+      <article class="project" id="kazi">
+        <div>
+          <h3>KAZI</h3>
+          <p class="where">Job portal for Uganda and East Africa</p>
+        </div>
+        <div>
+          <p class="what">Candidates search and apply for jobs and track every application. Employers run hiring on a drag-and-drop pipeline. Admins verify companies and catch fraudulent listings before anyone sees them.</p>
+          <p class="stack">Next.js 16, React 19, Prisma, PostgreSQL, Auth.js, Vitest, Playwright</p>
+          <a class="code" href="https://github.com/joshuam7733/kazi-job-portal">View code on GitHub</a>
+        </div>
+      </article>
+
+      <article class="project" id="dropoff">
+        <div>
+          <h3>Drop Off</h3>
+          <p class="where">Delivery platform for Kampala businesses</p>
+        </div>
+        <div>
+          <p class="what">Vendors book riders and drivers. Riders deliver with proof and cash out to mobile money. Recipients track the parcel and confirm it with a PIN, no account needed. Includes Android apps for vendors and riders.</p>
+          <p class="stack">Supabase, PostgreSQL, Edge Functions, Android, SMS one-time codes</p>
+          <a class="code" href="https://github.com/joshuam7733/dropoff">View code on GitHub</a>
+        </div>
+      </article>
+
+      <article class="project" id="stackd">
+        <div>
+          <h3>STACKD</h3>
+          <p class="where">Competitive gaming platform</p>
+        </div>
+        <div>
+          <p class="what">Players compete in the games they already play: bet-on-yourself challenges, head-to-heads, 100-player pools and tournaments, with wallets, leaderboards and payouts. Runs on demo money.</p>
+          <p class="stack">Node.js, SQLite, OpenID Connect, mobile-first web app</p>
+          <a class="code" href="https://github.com/joshuam7733/stackd">View code on GitHub</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="group" aria-labelledby="g-client">
+      <h2 id="g-client">Client work <span>(2)</span></h2>
+
+      <article class="project" id="linustats">
+        <div>
+          <h3>LinusTats</h3>
+          <p class="where">Tattoo studio website, Bukoto</p>
+        </div>
+        <div>
+          <p class="what">A studio site built around a 3D try-on. Visitors pick a design, place it on a body, size and rotate it, then send the concept straight to the studio.</p>
+          <p class="stack">Next.js, Three.js, React Three Fiber, Tailwind CSS</p>
+          <a class="code" href="https://github.com/joshuam7733/linas-tats">View code on GitHub</a>
+        </div>
+      </article>
+
+      <article class="project" id="uplex">
+        <div>
+          <h3>Uplex &amp; Associates</h3>
+          <p class="where">Website redesign concept</p>
+        </div>
+        <div>
+          <p class="what">A complete, responsive redesign of a professional firm's website, built to deploy as a single page on any static host.</p>
+          <p class="stack">React, TypeScript, Tailwind CSS, Vite</p>
+          <a class="code" href="https://github.com/joshuam7733/uplex.dev">View code on GitHub</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="group" aria-labelledby="g-exp">
+      <h2 id="g-exp">Experiments <span>(2)</span></h2>
+
+      <article class="project" id="skyhunt">
+        <div>
+          <h3>Sky Hunt</h3>
+          <p class="where">Browser game</p>
+        </div>
+        <div>
+          <p class="what">A crash-style game: a bird flies while the multiplier climbs, and you cash out before the hunters knock it down. Virtual credits only, with its own test suite and design system.</p>
+          <p class="stack">JavaScript, no build step</p>
+          <a class="code" href="https://github.com/joshuam7733/skyhunt">View code on GitHub</a>
+        </div>
+      </article>
+
+      <article class="project" id="ams">
+        <div>
+          <h3>AMS Scalper</h3>
+          <p class="where">Trading strategy research</p>
+        </div>
+        <div>
+          <p class="what">A multi-strategy scalping engine for TradingView, made for backtesting and paper trading only.</p>
+          <p class="stack">Pine Script v6</p>
+          <a class="code" href="https://github.com/joshuam7733/scalping-bot">View code on GitHub</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <span>Joshua Magembe, Kampala</span>
+    <a href="https://github.com/joshuam7733">github.com/joshuam7733</a>
+  </footer>
+</div>
+</body>
+</html>
