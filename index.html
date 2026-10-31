@@ -138,15 +138,14 @@
   .project .where { margin: 0.6rem 0 0; color: var(--ink-soft); font-size: 0.95rem; }
   .project .what { margin: 0; max-width: 34rem; }
   .project .stack { margin: 0.75rem 0 0; color: var(--leaf); font-size: 0.95rem; }
-  .project .code {
-    display: inline-block;
-    margin-top: 1rem;
-    font-weight: 600;
+  .project .links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin: 1rem 0 0; }
+  .project .links a {
     text-decoration-thickness: 2px;
     text-underline-offset: 4px;
-    text-decoration-color: var(--mango);
   }
-  .project .code:hover { text-decoration-color: var(--ink); }
+  .project .links .live { font-weight: 600; text-decoration-color: var(--mango); }
+  .project .links .code { color: var(--ink-soft); text-decoration-color: var(--rule); }
+  .project .links a:hover { color: var(--ink); text-decoration-color: var(--ink); }
 
   footer {
     border-top: 2px solid var(--ink);
@@ -173,7 +172,7 @@
 
   <section class="hero">
     <h1>I build software for how Kampala <a href="#zawli">eats</a>, <a href="#kazi">works</a>, <a href="#dropoff">moves</a> and <a href="#stackd">plays</a>.</h1>
-    <p>Restaurant operations, hiring, deliveries and competitive gaming, designed for Ugandan businesses, mobile money and the phones people actually carry. Every project below is open source.</p>
+    <p>Restaurant operations, hiring, deliveries and competitive gaming, designed for Ugandan businesses, mobile money and the phones people actually carry. Every project below is open source, and most can be tried right in your browser.</p>
   </section>
 
   <main id="work">
@@ -188,7 +187,7 @@
         <div>
           <p class="what">Customers order from a QR code at their table. The kitchen sees orders live and prints tickets, waiters get a floor screen, and owners get payments and reports. Many restaurants run on one system, each kept completely separate.</p>
           <p class="stack">Next.js, TypeScript, Prisma, PostgreSQL, Better Auth, Playwright</p>
-          <a class="code" href="https://github.com/joshuam7733/zawli">View code on GitHub</a>
+          <p class="links"><a class="live" href="https://joshuam7733.github.io/zawli/">See the preview</a><a class="code" href="https://github.com/joshuam7733/zawli">View code on GitHub</a></p>
         </div>
       </article>
 
@@ -200,7 +199,7 @@
         <div>
           <p class="what">Candidates search and apply for jobs and track every application. Employers run hiring on a drag-and-drop pipeline. Admins verify companies and catch fraudulent listings before anyone sees them.</p>
           <p class="stack">Next.js 16, React 19, Prisma, PostgreSQL, Auth.js, Vitest, Playwright</p>
-          <a class="code" href="https://github.com/joshuam7733/kazi-job-portal">View code on GitHub</a>
+          <p class="links"><a class="live" href="https://joshuam7733.github.io/kazi-job-portal/">See the preview</a><a class="code" href="https://github.com/joshuam7733/kazi-job-portal">View code on GitHub</a></p>
         </div>
       </article>
 
@@ -212,7 +211,7 @@
         <div>
           <p class="what">Vendors book riders and drivers. Riders deliver with proof and cash out to mobile money. Recipients track the parcel and confirm it with a PIN, no account needed. Includes Android apps for vendors and riders.</p>
           <p class="stack">Supabase, PostgreSQL, Edge Functions, Android, SMS one-time codes</p>
-          <a class="code" href="https://github.com/joshuam7733/dropoff">View code on GitHub</a>
+          <p class="links"><a class="live" href="https://joshuam7733.github.io/dropoff/">Try the demo</a><a class="code" href="https://github.com/joshuam7733/dropoff">View code on GitHub</a></p>
         </div>
       </article>
 
@@ -224,7 +223,7 @@
         <div>
           <p class="what">Players compete in the games they already play: bet-on-yourself challenges, head-to-heads, 100-player pools and tournaments, with wallets, leaderboards and payouts. Runs on demo money.</p>
           <p class="stack">Node.js, SQLite, OpenID Connect, mobile-first web app</p>
-          <a class="code" href="https://github.com/joshuam7733/stackd">View code on GitHub</a>
+          <p class="links"><a class="live" href="https://joshuam7733.github.io/stackd/">Try the demo</a><a class="code" href="https://github.com/joshuam7733/stackd">View code on GitHub</a></p>
         </div>
       </article>
     </section>
@@ -240,7 +239,7 @@
         <div>
           <p class="what">A studio site built around a 3D try-on. Visitors pick a design, place it on a body, size and rotate it, then send the concept straight to the studio.</p>
           <p class="stack">Next.js, Three.js, React Three Fiber, Tailwind CSS</p>
-          <a class="code" href="https://github.com/joshuam7733/linas-tats">View code on GitHub</a>
+          <p class="links"><a class="live" href="https://joshuam7733.github.io/linas-tats/">Visit the site</a><a class="code" href="https://github.com/joshuam7733/linas-tats">View code on GitHub</a></p>
         </div>
       </article>
 
@@ -252,7 +251,7 @@
         <div>
           <p class="what">A complete, responsive redesign of a professional firm's website, built to deploy as a single page on any static host.</p>
           <p class="stack">React, TypeScript, Tailwind CSS, Vite</p>
-          <a class="code" href="https://github.com/joshuam7733/uplex.dev">View code on GitHub</a>
+          <p class="links"><a class="live" href="https://joshuam7733.github.io/uplex.dev/">Visit the site</a><a class="code" href="https://github.com/joshuam7733/uplex.dev">View code on GitHub</a></p>
         </div>
       </article>
     </section>
@@ -268,7 +267,7 @@
         <div>
           <p class="what">A crash-style game: a bird flies while the multiplier climbs, and you cash out before the hunters knock it down. Virtual credits only, with its own test suite and design system.</p>
           <p class="stack">JavaScript, no build step</p>
-          <a class="code" href="https://github.com/joshuam7733/skyhunt">View code on GitHub</a>
+          <p class="links"><a class="live" href="https://joshuam7733.github.io/skyhunt/">Play the game</a><a class="code" href="https://github.com/joshuam7733/skyhunt">View code on GitHub</a></p>
         </div>
       </article>
 
@@ -280,7 +279,7 @@
         <div>
           <p class="what">A multi-strategy scalping engine for TradingView, made for backtesting and paper trading only.</p>
           <p class="stack">Pine Script v6</p>
-          <a class="code" href="https://github.com/joshuam7733/scalping-bot">View code on GitHub</a>
+          <p class="links"><a class="code" href="https://github.com/joshuam7733/scalping-bot">View code on GitHub</a></p>
         </div>
       </article>
     </section>
