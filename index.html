@@ -740,9 +740,17 @@
       })
         .then(function (r) { return r.json(); })
         .then(function (res) {
-          if (String(res.success) !== "true") throw new Error(res.message || "Not sent");
-          form.reset();
-          say("Thanks, your request is on its way. I'll reply to the email you gave.", "ok");
+          if (String(res.success) === "true") {
+            form.reset();
+            say("Thanks, your request is on its way. I'll reply to the email you gave.", "ok");
+            return;
+          }
+          // FormSubmit holds requests until the inbox owner clicks its activation link.
+          if (/activat/i.test(res.message || "")) {
+            say("This form is still being set up. Please email joshua.m7733@gmail.com for now.", "error");
+            return;
+          }
+          throw new Error(res.message || "Not sent");
         })
         .catch(function () {
           say("That didn't send. Please try again, or email joshua.m7733@gmail.com.", "error");
