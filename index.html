@@ -210,6 +210,8 @@
   .art-grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .art-grid.meilin { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
   .art { margin: 0; }
+  .art.banner { grid-column: 1 / -1; }
+  .art.wide { grid-column: span 2; }
   .art a { display: block; overflow: hidden; background: var(--card); border-radius: var(--r-media); }
   .art img { width: 100%; transition: transform 600ms var(--ease-out); }
   .art a:hover img { transform: scale(1.04); }
@@ -263,6 +265,11 @@
   .quote .submit { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; margin-top: 1.1rem; }
   .quote .btn { margin: 0; border: 0; cursor: pointer; font: inherit; font-weight: 700; }
   .form-note { margin: 0; color: var(--ink-soft); font-size: 0.875rem; }
+  .form-note.ok { color: var(--leaf); font-weight: 600; }
+  .form-note.error { color: #B3261E; font-weight: 600; }
+  .quote .btn[disabled] { opacity: 0.7; cursor: progress; }
+  /* Spam trap: invisible to people, tempting to bots. */
+  .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
   /* Scroll reveals: panels and the items inside them rise once as they arrive. */
   .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out); transition-delay: var(--delay, 0ms); }
@@ -545,31 +552,40 @@
   <section class="panel reveal" id="brand-uplex" aria-label="Uplex and Associates brand">
     <div class="sheet-head">
       <h4>Uplex &amp; Associates</h4>
-      <p>A brand identity for a tax, accounting and advisory firm, then a full campaign for its SME masterclass: the event poster, problem-led posts and a daily countdown built from one template.</p>
+      <p>A brand identity for a tax, accounting and advisory firm, carried across LinkedIn, print and social, then a full campaign for its SME masterclass: the sponsorship pack, event poster, problem-led posts and a daily countdown built from one template.</p>
     </div>
     <div class="art-grid four">
+      <figure class="art banner reveal"><a href="work/uplex-linkedin.jpg"><img src="work/uplex-linkedin.jpg" alt="Uplex &amp; Associates LinkedIn cover" width="1400" height="350" loading="lazy" decoding="async"></a><figcaption>LinkedIn cover</figcaption></figure>
       <figure class="art reveal"><a href="work/uplex-logo.jpg"><img src="work/uplex-logo.jpg" alt="Uplex &amp; Associates logo" width="720" height="540" loading="lazy" decoding="async"></a><figcaption>Identity</figcaption></figure>
       <figure class="art reveal"><a href="work/uplex-speaker.jpg"><img src="work/uplex-speaker.jpg" alt="Masterclass poster" width="720" height="1019" loading="lazy" decoding="async"></a><figcaption>Masterclass poster</figcaption></figure>
       <figure class="art reveal"><a href="work/uplex-70pct.jpg"><img src="work/uplex-70pct.jpg" alt="70% of SMEs fail campaign post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Campaign post</figcaption></figure>
       <figure class="art reveal"><a href="work/uplex-21days.jpg"><img src="work/uplex-21days.jpg" alt="21 days to go countdown post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Countdown series</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-concept.jpg"><img src="work/uplex-concept.jpg" alt="Concept note and sponsorship pack cover" width="720" height="1018" loading="lazy" decoding="async"></a><figcaption>Sponsorship pack</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-intro.jpg"><img src="work/uplex-intro.jpg" alt="Masterclass details post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Masterclass details</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-ura.jpg"><img src="work/uplex-ura.jpg" alt="Can your business survive a URA audit post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>URA audit post</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-ugandan.jpg"><img src="work/uplex-ugandan.jpg" alt="Designed for Ugandan SMEs post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Positioning post</figcaption></figure>
     </div>
   </section>
 
   <section class="panel reveal" id="brand-meilin" aria-label="Meilin International posters">
     <div class="sheet-head">
       <h4>Meilin International</h4>
-      <p>Social posters for matchdays and an app launch, written and designed to stop the scroll.</p>
+      <p>Social posters for matchdays, promotions and an app launch, written and designed to stop the scroll.</p>
     </div>
-    <div class="art-grid meilin">
-      <figure class="art reveal"><a href="work/meilin-fixtures.jpg"><img src="work/meilin-fixtures.jpg" alt="UEFA Europa League fixtures poster" width="960" height="681" loading="lazy" decoding="async"></a><figcaption>Matchday fixtures</figcaption></figure>
+    <div class="art-grid four">
+      <figure class="art wide reveal"><a href="work/meilin-fixtures.jpg"><img src="work/meilin-fixtures.jpg" alt="UEFA Europa League fixtures poster" width="960" height="681" loading="lazy" decoding="async"></a><figcaption>Matchday fixtures</figcaption></figure>
       <figure class="art reveal"><a href="work/meilin-oneapp.jpg"><img src="work/meilin-oneapp.jpg" alt="App launch poster" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>App launch</figcaption></figure>
+      <figure class="art reveal"><a href="work/meilin-odds.jpg"><img src="work/meilin-odds.jpg" alt="Get crazy odds poster" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Odds promo</figcaption></figure>
+      <figure class="art wide reveal"><a href="work/meilin-invite.jpg"><img src="work/meilin-invite.jpg" alt="Invite bonus poster" width="720" height="511" loading="lazy" decoding="async"></a><figcaption>Invite bonus</figcaption></figure>
+      <figure class="art reveal"><a href="work/meilin-cashout.jpg"><img src="work/meilin-cashout.jpg" alt="Fast cashouts poster" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Fast cashouts</figcaption></figure>
+      <figure class="art reveal"><a href="work/meilin-legit.jpg"><img src="work/meilin-legit.jpg" alt="Meilin.ug is legit poster" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Trust campaign</figcaption></figure>
     </div>
   </section>
 
   <!-- 04 Video -->
   <section class="panel opener reveal" id="video" aria-labelledby="h-video">
     <div><p class="num">04</p><h2 class="big" id="h-video">Video</h2><p class="spaced">Script, shoot, edit</p></div>
-    <div class="body"><p>Property films, app tutorials and launch teasers, from the script to the final edit.</p><ul><li><a href="#films"><b>Spacious Homes Uganda</b><span>Property film</span></a></li><li><a href="#films"><b>Meilin International</b><span>Tutorial and teaser</span></a></li></ul></div>
+    <div class="body"><p>Property films, app tutorials and launch teasers, from the script to the final edit.</p><ul><li><a href="#films"><b>Spacious Homes Uganda</b><span>Property film</span></a></li><li><a href="#films"><b>Meilin International</b><span>Tutorials, teasers and ads</span></a></li></ul></div>
   </section>
 
   <section class="panel reveal" id="films" aria-labelledby="h-films">
@@ -581,6 +597,9 @@
       <figure class="reel reveal"><a href="https://drive.google.com/file/d/17DEPW9W4LVSRDntmp2NnPq6sNQ8jPy5q/view" aria-label="Watch Luxury property walkthrough on Google Drive"><img src="work/reel-spacious.jpg" alt="Modern house exterior" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Spacious Homes Uganda</b>Luxury property walkthrough</figcaption></figure>
       <figure class="reel reveal"><a href="https://drive.google.com/file/d/1_c1A8Y2Jzc7S_RJ2naBnYowgrC1hEliw/view" aria-label="Watch How to deposit, an app tutorial on Google Drive"><img src="work/reel-deposit.jpg" alt="How to Deposit title card" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>How to deposit, an app tutorial</figcaption></figure>
       <figure class="reel reveal"><a href="https://drive.google.com/file/d/1HOPWI_gSCjtMvyfixywJTfcRDdLGIwGd/view" aria-label="Watch The wait is over, a launch teaser on Google Drive"><img src="work/reel-waitover.jpg" alt="Black and white clock" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>The wait is over, a launch teaser</figcaption></figure>
+      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1PcS8i7uzYI55xMREv_R9KcBX3ucizTEO/view" aria-label="Watch Referral ad on Google Drive"><img src="work/reel-referral.jpg" alt="Laughing man in glasses" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>Referral ad</figcaption></figure>
+      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1rXSiRHK-y3Bu3Lob_r_oy5nFiwQPh2Pp/view" aria-label="Watch Coming soon, a launch teaser on Google Drive"><img src="work/reel-comingsoon.jpg" alt="A lone chair under a spotlight" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>Coming soon, a launch teaser</figcaption></figure>
+      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1_DGyGH9EygAvcSZfzBPKLmrKnwjvzv_c/view" aria-label="Watch Physical club, a venue promo on Google Drive"><img src="work/reel-club.jpg" alt="Chips on a gaming table" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>Physical club, a venue promo</figcaption></figure>
     </div>
   </section>
 
@@ -599,13 +618,15 @@
       <p class="actions"><a class="btn" href="https://joshuam7733.github.io/skyhunt/">Play the game</a><a class="ghost" href="https://github.com/joshuam7733/skyhunt">View code</a></p>
     </div>
   </article>
-  <section class="panel note-panel reveal" id="ams" aria-labelledby="h-ams">
-    <h4 id="h-ams">AMS Scalper</h4>
-    <div>
-      <p>A multi-strategy scalping engine for TradingView, written in Pine Script for backtesting and paper trading only.</p>
-      <p style="margin-top:1rem"><a class="text-link" href="https://github.com/joshuam7733/scalping-bot">View code on GitHub</a></p>
+  <article class="panel card reveal" id="ams" aria-labelledby="h-ams">
+    <div class="shot"><img src="work/card-ams.jpg" alt="" width="1440" height="900" loading="lazy" decoding="async"></div>
+    <div class="copy">
+      <p class="kind">Trading strategy research</p>
+      <h3 id="h-ams">AMS Scalper</h3>
+      <p class="what">A scalping engine for TradingView with five setup models, from trend continuation to breakout retests, each scored and risk-checked before an entry. Written in Pine Script for backtesting and paper trading only.</p>
+      <p class="actions"><a class="ghost" href="https://github.com/joshuam7733/scalping-bot">View code</a></p>
     </div>
-  </section>
+  </article>
 
   <!-- Thank you -->
   <section class="panel thanks reveal" id="contact" aria-labelledby="h-thanks">
@@ -644,11 +665,12 @@
               <option>Within a month</option>
               <option>In 1 to 3 months</option>
             </select></div>
+          <div class="trap" aria-hidden="true"><label for="q-website">Website</label><input id="q-website" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
           <div class="field wide"><label for="q-details">Project details</label><textarea id="q-details" name="details" required placeholder="What are you building, and who is it for?"></textarea></div>
         </div>
         <div class="submit">
           <button class="btn" type="submit">Send request</button>
-          <p class="form-note" id="q-note" aria-live="polite">Opens your email app with the request filled in.</p>
+          <p class="form-note" id="q-note" aria-live="polite">Goes straight to my inbox.</p>
         </div>
       </form>
     </div>
@@ -686,25 +708,46 @@
     items.forEach(function (el) { io.observe(el); });
   })();
 
-  // Quote form: the site is static, so the request goes out through the visitor's email app.
+  // Quote form: posts to FormSubmit, which emails the request straight to Joshua.
   (function () {
     var form = document.getElementById("quote");
     if (!form) return;
+    var note = document.getElementById("q-note");
+    var button = form.querySelector("button[type=submit]");
+    var say = function (text, kind) { note.textContent = text; note.className = "form-note" + (kind ? " " + kind : ""); };
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var f = form.elements;
-      var body = [
-        "Name: " + f.name.value.trim(),
-        "Email: " + f.email.value.trim(),
-        "Project: " + f.type.value,
-        "Budget: " + (f.budget.value || "Not sure yet"),
-        "Timeline: " + (f.timeline.value || "Flexible"),
-        "",
-        f.details.value.trim()
-      ].join("\n");
-      var subject = "Quote request: " + f.type.value + " for " + f.name.value.trim();
-      window.location.href = "mailto:joshua.m7733@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-      document.getElementById("q-note").textContent = "Your email app should open with the request ready to send. If it doesn't, email joshua.m7733@gmail.com.";
+      if (f._honey.value) return;
+      var data = {
+        name: f.name.value.trim(),
+        email: f.email.value.trim(),
+        project: f.type.value,
+        budget: f.budget.value || "Not sure yet",
+        timeline: f.timeline.value || "Flexible",
+        details: f.details.value.trim(),
+        _subject: "Quote request: " + f.type.value + " for " + f.name.value.trim(),
+        _template: "table",
+        _captcha: "false"
+      };
+      button.disabled = true;
+      button.textContent = "Sending...";
+      say("");
+      fetch("https://formsubmit.co/ajax/joshua.m7733@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(data)
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+          if (String(res.success) !== "true") throw new Error(res.message || "Not sent");
+          form.reset();
+          say("Thanks, your request is on its way. I'll reply to the email you gave.", "ok");
+        })
+        .catch(function () {
+          say("That didn't send. Please try again, or email joshua.m7733@gmail.com.", "error");
+        })
+        .then(function () { button.disabled = false; button.textContent = "Send request"; });
     });
   })();
 
