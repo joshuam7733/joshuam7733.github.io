@@ -708,8 +708,10 @@
     items.forEach(function (el) { io.observe(el); });
   })();
 
-  // Quote form: posts to FormSubmit, which emails the request straight to Joshua.
+  // Quote form: posts to Web3Forms, which emails the request straight to Joshua.
   (function () {
+    // Public form key from web3forms.com. It only allows sending messages to Joshua's inbox.
+    var ACCESS_KEY = "23552ab1-bde0-4402-b58f-8aa501750e9d";
     var form = document.getElementById("quote");
     if (!form) return;
     var note = document.getElementById("q-note");
@@ -720,37 +722,29 @@
       var f = form.elements;
       if (f._honey.value) return;
       var data = {
+        access_key: ACCESS_KEY,
+        subject: "Quote request: " + f.type.value + " for " + f.name.value.trim(),
+        from_name: "Portfolio quote form",
         name: f.name.value.trim(),
         email: f.email.value.trim(),
         project: f.type.value,
         budget: f.budget.value || "Not sure yet",
         timeline: f.timeline.value || "Flexible",
-        details: f.details.value.trim(),
-        _subject: "Quote request: " + f.type.value + " for " + f.name.value.trim(),
-        _template: "table",
-        _captcha: "false"
+        message: f.details.value.trim()
       };
       button.disabled = true;
       button.textContent = "Sending...";
       say("");
-      fetch("https://formsubmit.co/ajax/joshua.m7733@gmail.com", {
+      fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(data)
       })
         .then(function (r) { return r.json(); })
         .then(function (res) {
-          if (String(res.success) === "true") {
-            form.reset();
-            say("Thanks, your request is on its way. I'll reply to the email you gave.", "ok");
-            return;
-          }
-          // FormSubmit holds requests until the inbox owner clicks its activation link.
-          if (/activat/i.test(res.message || "")) {
-            say("This form is still being set up. Please email joshua.m7733@gmail.com for now.", "error");
-            return;
-          }
-          throw new Error(res.message || "Not sent");
+          if (!res.success) throw new Error(res.message || "Not sent");
+          form.reset();
+          say("Thanks, your request is on its way. I'll reply to the email you gave.", "ok");
         })
         .catch(function () {
           say("That didn't send. Please try again, or email joshua.m7733@gmail.com.", "error");
