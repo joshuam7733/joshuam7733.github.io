@@ -6,11 +6,15 @@
 <title>Joshua Magembe</title>
 <meta name="description" content="Portfolio of Joshua Magembe, designer in Kampala: product design and software, client websites, brand campaigns and video.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314281F'/%3E%3Crect x='7' y='17' width='18' height='7' fill='%23E8A317'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='800' font-size='17' text-anchor='middle' fill='%23F3F5EF'%3EJM%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add("js")</script>
 <style>
+  @font-face {
+    font-family: "Bricolage Grotesque";
+    src: url("fonts/bricolage-grotesque-latin.woff2") format("woff2");
+    font-weight: 200 800; font-stretch: 75% 100%; font-style: normal; font-display: swap;
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
   :root {
     --paper: #F3F5EF;
     --panel: #E6EAE2;
@@ -128,7 +132,6 @@
   .roles { margin: 0; padding: 0; list-style: none; }
   .roles li { padding: 0.55rem 0; border-top: 1px solid var(--rule); font-size: 0.95rem; line-height: 1.35; }
   .roles b { display: block; font-weight: 700; }
-  .hello h3.after-roles { margin-top: 1.25rem; }
   .roles span { color: var(--ink-soft); }
   .strip { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 0.75rem 2rem; padding-top: 1.25rem; border-top: 2px solid var(--ink); font-size: 0.95rem; }
   .strip a, .strip span { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
@@ -138,7 +141,7 @@
   /* 3. Contents */
   .contents { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); padding: 0; }
   .duotone { margin: 0; background: var(--mango); min-height: 24rem; }
-  .duotone img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; filter: grayscale(1) contrast(1.2) brightness(1.08); mix-blend-mode: multiply; }
+  .duotone img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; }
   .js .duotone img { clip-path: inset(0 100% 0 0); transition: clip-path 1000ms cubic-bezier(.65, 0, .35, 1) 150ms; }
   .js .contents.in .duotone img { clip-path: inset(0); }
   .contents .list { padding: clamp(1.5rem, 5vw, 4rem); align-self: center; }
@@ -228,6 +231,26 @@
   .reel a:hover .play { transform: scale(1.08); }
   .reel figcaption { margin-top: 0.6rem; font-size: 0.925rem; color: var(--ink-soft); }
   .reel figcaption b { display: block; color: var(--ink); }
+
+  /* Video player: Google Drive's player in a window over the page, shaped to the video. */
+  .player { padding: 0; border: 0; background: transparent; overflow: visible; max-width: none; max-height: none; }
+  .player::backdrop { background: rgb(10 15 12 / 0.88); backdrop-filter: blur(4px); }
+  .player-frame { position: relative; overflow: hidden; border-radius: var(--r-media); background: #0A0F0C; box-shadow: 0 2rem 5rem rgb(0 0 0 / 0.5); }
+  .player.tall .player-frame { height: min(82vh, 52rem); aspect-ratio: 9 / 16; max-width: 92vw; }
+  .player.wide .player-frame { width: min(92vw, 70rem); aspect-ratio: 16 / 9; max-height: 78vh; }
+  .player-frame::before { content: "Loading video..."; position: absolute; inset: 0; display: grid; place-items: center; color: #A7B8AD; font-size: 0.95rem; }
+  .player iframe { position: relative; width: 100%; height: 100%; border: 0; }
+  .player-caption { margin: 0.75rem 0 0; color: #E9EFE6; font-size: 0.95rem; }
+  .player-caption b { color: var(--mango); }
+  .player-close {
+    position: absolute; top: -0.75rem; right: -0.75rem; z-index: 1;
+    width: 2.75rem; height: 2.75rem; border: 0; border-radius: 50%;
+    background: var(--mango); color: #14281F; font: inherit; font-size: 1.6rem; line-height: 1; cursor: pointer;
+    box-shadow: 0 0.5rem 1.25rem rgb(0 0 0 / 0.35);
+  }
+  .player-close:hover { background: #F2B93A; }
+  .player-close:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+  @media (max-width: 680px) { .player-close { top: 0.5rem; right: 0.5rem; } }
 
   .note-panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 1rem clamp(1.5rem, 4vw, 3.5rem); }
   .note-panel h4 { margin: 0; font-size: clamp(1.8rem, 4vw, 3rem); line-height: 0.95; font-weight: 800; font-stretch: 78%; text-transform: uppercase; letter-spacing: -0.02em; }
@@ -342,10 +365,10 @@
       <p class="statement">I design and build for how Kampala <a href="#zawli">eats</a>, <a href="#kazi">works</a>, <a href="#dropoff">moves</a> and <a href="#stackd">plays</a>.</p>
     </div>
     <div class="fan" aria-hidden="true">
-      <figure class="phone p1"><img src="work/zawli-menu.jpg" alt="" width="390" height="844" fetchpriority="high"></figure>
-      <figure class="phone p2"><img src="work/kazi-jobs-phone.jpg" alt="" width="390" height="844" fetchpriority="high"></figure>
-      <figure class="phone p3"><img src="work/stackd-phone.jpg" alt="" width="390" height="844" fetchpriority="high"></figure>
-      <figure class="phone p4"><img src="work/zawli-floor.jpg" alt="" width="390" height="844" fetchpriority="high"></figure>
+      <figure class="phone p1"><img src="work/zawli-menu.webp" alt="" width="390" height="844" fetchpriority="high"></figure>
+      <figure class="phone p2"><img src="work/kazi-jobs-phone.webp" alt="" width="390" height="844" fetchpriority="high"></figure>
+      <figure class="phone p3"><img src="work/stackd-phone.webp" alt="" width="390" height="844" fetchpriority="high"></figure>
+      <figure class="phone p4"><img src="work/zawli-floor.webp" alt="" width="390" height="844" fetchpriority="high"></figure>
     </div>
   </section>
 
@@ -392,11 +415,8 @@
           <li><b>Video editor and animator</b><span>Brand My Tube, 2025</span></li>
           <li><b>Creative director</b><span>Spacious Homes Uganda, 2023 to 2025</span></li>
           <li><b>Creative director</b><span>Ishita Properties, 2022 to 2023</span></li>
-          <li><b>Creative strategist and content creator</b><span>Minoxidil Uganda, 2021 to 2022</span></li>
-        </ul>
-        <h3 class="after-roles">Education</h3>
-        <ul class="roles">
           <li><b>Graphic design and animation</b><span>Purple Skills Klinic, 2022 to 2023</span></li>
+          <li><b>Creative strategist and content creator</b><span>Minoxidil Uganda, 2021 to 2022</span></li>
           <li><b>Videography and production</b><span>Purple Skills Klinic, 2021 to 2022</span></li>
         </ul>
       </div>
@@ -410,14 +430,14 @@
 
   <!-- 3. Contents -->
   <section class="panel night contents reveal" id="contents" aria-labelledby="h-contents">
-    <figure class="duotone"><img src="img/joshua-suit.jpg" alt="Joshua Magembe in a suit" width="640" height="800" loading="lazy" decoding="async"></figure>
+    <figure class="duotone"><img src="img/joshua-suit-duotone.webp" alt="Joshua Magembe in a suit" width="640" height="800" loading="lazy" decoding="async"></figure>
     <div class="list">
       <h2 class="big" id="h-contents">Contents</h2>
       <ol>
         <li><a href="#product"><b>Product design</b><span>Zawli, KAZI, Drop Off, STACKD</span></a></li>
         <li><a href="#client"><b>Client websites</b><span>LinusTats, Uplex &amp; Associates</span></a></li>
         <li><a href="#brand"><b>Brand and campaigns</b><span>Uplex &amp; Associates, Meilin International</span></a></li>
-        <li><a href="#video"><b>Video</b><span>Spacious Homes Uganda</span></a></li>
+        <li><a href="#video"><b>Video</b><span>Ishita Properties, Meilin International</span></a></li>
         <li><a href="#experiments"><b>Experiments</b><span>Sky Hunt, AMS Scalper</span></a></li>
       </ol>
     </div>
@@ -430,7 +450,7 @@
   </section>
 
   <article class="panel card reveal" id="zawli" aria-labelledby="h-zawli">
-    <div class="shot"><img src="work/card-zawli.jpg" alt="" width="1440" height="900" loading="lazy" decoding="async"></div>
+    <div class="shot"><img src="work/card-zawli.webp" alt="" width="1100" height="688" loading="lazy" decoding="async"></div>
     <div class="copy">
       <p class="kind">Restaurant operations platform</p>
       <h3 id="h-zawli">Zawli</h3>
@@ -448,18 +468,18 @@
     </div>
     <div class="shots two-plus-phones">
       <div class="desk">
-        <figure class="screen reveal"><img src="work/zawli-dashboard.jpg" alt="Zawli owner dashboard" width="900" height="562" loading="lazy" decoding="async"><figcaption>Owner dashboard</figcaption></figure>
-        <figure class="screen reveal"><img src="work/zawli-kitchen.jpg" alt="Zawli kitchen display" width="900" height="562" loading="lazy" decoding="async"><figcaption>Kitchen display</figcaption></figure>
+        <figure class="screen reveal"><img src="work/zawli-dashboard.webp" alt="Zawli owner dashboard" width="900" height="562" loading="lazy" decoding="async"><figcaption>Owner dashboard</figcaption></figure>
+        <figure class="screen reveal"><img src="work/zawli-kitchen.webp" alt="Zawli kitchen display" width="900" height="562" loading="lazy" decoding="async"><figcaption>Kitchen display</figcaption></figure>
       </div>
       <div class="phones">
-        <figure class="screen mobile reveal"><img src="work/zawli-menu.jpg" alt="Guest menu on a phone" width="390" height="844" loading="lazy" decoding="async"><figcaption>Guest menu</figcaption></figure>
-        <figure class="screen mobile reveal"><img src="work/zawli-floor.jpg" alt="Waiter floor screen on a phone" width="390" height="844" loading="lazy" decoding="async"><figcaption>Waiter floor</figcaption></figure>
+        <figure class="screen mobile reveal"><img src="work/zawli-menu.webp" alt="Guest menu on a phone" width="390" height="844" loading="lazy" decoding="async"><figcaption>Guest menu</figcaption></figure>
+        <figure class="screen mobile reveal"><img src="work/zawli-floor.webp" alt="Waiter floor screen on a phone" width="390" height="844" loading="lazy" decoding="async"><figcaption>Waiter floor</figcaption></figure>
       </div>
     </div>
   </section>
 
   <article class="panel card reveal" id="kazi" aria-labelledby="h-kazi">
-    <div class="shot"><img src="work/card-kazi.jpg" alt="" width="1440" height="900" loading="lazy" decoding="async"></div>
+    <div class="shot"><img src="work/card-kazi.webp" alt="" width="1100" height="688" loading="lazy" decoding="async"></div>
     <div class="copy">
       <p class="kind">Job portal for Uganda and East Africa</p>
       <h3 id="h-kazi">KAZI</h3>
@@ -477,17 +497,17 @@
     </div>
     <div class="shots two-plus-phones">
       <div class="desk">
-        <figure class="screen reveal"><img src="work/kazi-pipeline.jpg" alt="KAZI hiring pipeline" width="900" height="562" loading="lazy" decoding="async"><figcaption>Hiring pipeline</figcaption></figure>
-        <figure class="screen reveal"><img src="work/kazi-moderation.jpg" alt="KAZI job moderation queue" width="900" height="562" loading="lazy" decoding="async"><figcaption>Moderation queue</figcaption></figure>
+        <figure class="screen reveal"><img src="work/kazi-pipeline.webp" alt="KAZI hiring pipeline" width="900" height="562" loading="lazy" decoding="async"><figcaption>Hiring pipeline</figcaption></figure>
+        <figure class="screen reveal"><img src="work/kazi-moderation.webp" alt="KAZI job moderation queue" width="900" height="562" loading="lazy" decoding="async"><figcaption>Moderation queue</figcaption></figure>
       </div>
       <div class="phones single">
-        <figure class="screen mobile reveal"><img src="work/kazi-jobs-phone.jpg" alt="KAZI job search on a phone" width="390" height="844" loading="lazy" decoding="async"><figcaption>Job search</figcaption></figure>
+        <figure class="screen mobile reveal"><img src="work/kazi-jobs-phone.webp" alt="KAZI job search on a phone" width="390" height="844" loading="lazy" decoding="async"><figcaption>Job search</figcaption></figure>
       </div>
     </div>
   </section>
 
   <article class="panel card reveal" id="dropoff" aria-labelledby="h-dropoff">
-    <div class="shot"><img src="work/card-dropoff.jpg" alt="" width="1440" height="900" loading="lazy" decoding="async"></div>
+    <div class="shot"><img src="work/card-dropoff.webp" alt="" width="1100" height="688" loading="lazy" decoding="async"></div>
     <div class="copy">
       <p class="kind">Delivery platform for Kampala</p>
       <h3 id="h-dropoff">Drop Off</h3>
@@ -503,11 +523,11 @@
         <p class="stack">JavaScript, Supabase, PostgreSQL, Android</p>
       </div>
     </div>
-    <figure class="screen reveal"><img src="work/dropoff-wall.jpg" alt="Drop Off vendor, rider and recipient apps side by side" width="1200" height="750" loading="lazy" decoding="async"><figcaption>Vendor, rider and recipient apps running together</figcaption></figure>
+    <figure class="screen reveal"><img src="work/dropoff-wall.webp" alt="Drop Off vendor, rider and recipient apps side by side" width="1200" height="750" loading="lazy" decoding="async"><figcaption>Vendor, rider and recipient apps running together</figcaption></figure>
   </section>
 
   <article class="panel card reveal" id="stackd" aria-labelledby="h-stackd">
-    <div class="shot"><img src="work/card-stackd.jpg" alt="" width="1440" height="900" loading="lazy" decoding="async"></div>
+    <div class="shot"><img src="work/card-stackd.webp" alt="" width="1100" height="688" loading="lazy" decoding="async"></div>
     <div class="copy">
       <p class="kind">Competitive gaming platform</p>
       <h3 id="h-stackd">STACKD</h3>
@@ -523,7 +543,7 @@
   </section>
 
   <article class="panel card reveal" id="linustats" aria-labelledby="h-linas">
-    <div class="shot"><img src="work/card-linas.jpg" alt="" width="1440" height="900" loading="lazy" decoding="async"></div>
+    <div class="shot"><img src="work/card-linas.webp" alt="" width="1100" height="688" loading="lazy" decoding="async"></div>
     <div class="copy">
       <p class="kind">Tattoo studio, Bukoto</p>
       <h3 id="h-linas">LinusTats</h3>
@@ -539,11 +559,11 @@
         <p class="stack">Next.js, Three.js, React Three Fiber, Tailwind CSS</p>
       </div>
     </div>
-    <figure class="screen reveal"><img src="work/linas-tryon.jpg" alt="3D tattoo try-on" width="900" height="562" loading="lazy" decoding="async"><figcaption>3D try-on</figcaption></figure>
+    <figure class="screen reveal"><img src="work/linas-tryon.webp" alt="3D tattoo try-on" width="900" height="562" loading="lazy" decoding="async"><figcaption>3D try-on</figcaption></figure>
   </section>
 
   <article class="panel card reveal" id="uplex" aria-labelledby="h-uplex">
-    <div class="shot"><img src="work/card-uplex.jpg" alt="" width="1440" height="900" loading="lazy" decoding="async"></div>
+    <div class="shot"><img src="work/card-uplex.webp" alt="" width="1100" height="688" loading="lazy" decoding="async"></div>
     <div class="copy">
       <p class="kind">Website redesign concept</p>
       <h3 id="h-uplex">Uplex</h3>
@@ -564,15 +584,15 @@
       <p>A brand identity for a tax, accounting and advisory firm, carried across LinkedIn, print and social, then a full campaign for its SME masterclass: the sponsorship pack, event poster, problem-led posts and a daily countdown built from one template.</p>
     </div>
     <div class="art-grid four">
-      <figure class="art banner reveal"><a href="work/uplex-linkedin.jpg"><img src="work/uplex-linkedin.jpg" alt="Uplex &amp; Associates LinkedIn cover" width="1400" height="350" loading="lazy" decoding="async"></a><figcaption>LinkedIn cover</figcaption></figure>
-      <figure class="art reveal"><a href="work/uplex-logo.jpg"><img src="work/uplex-logo.jpg" alt="Uplex &amp; Associates logo" width="720" height="540" loading="lazy" decoding="async"></a><figcaption>Identity</figcaption></figure>
-      <figure class="art reveal"><a href="work/uplex-speaker.jpg"><img src="work/uplex-speaker.jpg" alt="Masterclass poster" width="720" height="1019" loading="lazy" decoding="async"></a><figcaption>Masterclass poster</figcaption></figure>
-      <figure class="art reveal"><a href="work/uplex-70pct.jpg"><img src="work/uplex-70pct.jpg" alt="70% of SMEs fail campaign post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Campaign post</figcaption></figure>
-      <figure class="art reveal"><a href="work/uplex-21days.jpg"><img src="work/uplex-21days.jpg" alt="21 days to go countdown post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Countdown series</figcaption></figure>
-      <figure class="art reveal"><a href="work/uplex-concept.jpg"><img src="work/uplex-concept.jpg" alt="Concept note and sponsorship pack cover" width="720" height="1018" loading="lazy" decoding="async"></a><figcaption>Sponsorship pack</figcaption></figure>
-      <figure class="art reveal"><a href="work/uplex-intro.jpg"><img src="work/uplex-intro.jpg" alt="Masterclass details post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Masterclass details</figcaption></figure>
-      <figure class="art reveal"><a href="work/uplex-ura.jpg"><img src="work/uplex-ura.jpg" alt="Can your business survive a URA audit post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>URA audit post</figcaption></figure>
-      <figure class="art reveal"><a href="work/uplex-ugandan.jpg"><img src="work/uplex-ugandan.jpg" alt="Designed for Ugandan SMEs post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Positioning post</figcaption></figure>
+      <figure class="art banner reveal"><a href="work/uplex-linkedin.webp"><img src="work/uplex-linkedin.webp" alt="Uplex &amp; Associates LinkedIn cover" width="1400" height="350" loading="lazy" decoding="async"></a><figcaption>LinkedIn cover</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-logo.webp"><img src="work/uplex-logo.webp" alt="Uplex &amp; Associates logo" width="720" height="540" loading="lazy" decoding="async"></a><figcaption>Identity</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-speaker.webp"><img src="work/uplex-speaker.webp" alt="Masterclass poster" width="720" height="1019" loading="lazy" decoding="async"></a><figcaption>Masterclass poster</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-70pct.webp"><img src="work/uplex-70pct.webp" alt="70% of SMEs fail campaign post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Campaign post</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-21days.webp"><img src="work/uplex-21days.webp" alt="21 days to go countdown post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Countdown series</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-concept.webp"><img src="work/uplex-concept.webp" alt="Concept note and sponsorship pack cover" width="720" height="1018" loading="lazy" decoding="async"></a><figcaption>Sponsorship pack</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-intro.webp"><img src="work/uplex-intro.webp" alt="Masterclass details post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Masterclass details</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-ura.webp"><img src="work/uplex-ura.webp" alt="Can your business survive a URA audit post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>URA audit post</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-ugandan.webp"><img src="work/uplex-ugandan.webp" alt="Designed for Ugandan SMEs post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Positioning post</figcaption></figure>
     </div>
   </section>
 
@@ -582,33 +602,33 @@
       <p>Social posters for matchdays, promotions and an app launch, written and designed to stop the scroll.</p>
     </div>
     <div class="art-grid four">
-      <figure class="art wide reveal"><a href="work/meilin-fixtures.jpg"><img src="work/meilin-fixtures.jpg" alt="UEFA Europa League fixtures poster" width="960" height="681" loading="lazy" decoding="async"></a><figcaption>Matchday fixtures</figcaption></figure>
-      <figure class="art reveal"><a href="work/meilin-oneapp.jpg"><img src="work/meilin-oneapp.jpg" alt="App launch poster" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>App launch</figcaption></figure>
-      <figure class="art reveal"><a href="work/meilin-odds.jpg"><img src="work/meilin-odds.jpg" alt="Get crazy odds poster" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Odds promo</figcaption></figure>
-      <figure class="art wide reveal"><a href="work/meilin-invite.jpg"><img src="work/meilin-invite.jpg" alt="Invite bonus poster" width="720" height="511" loading="lazy" decoding="async"></a><figcaption>Invite bonus</figcaption></figure>
-      <figure class="art reveal"><a href="work/meilin-cashout.jpg"><img src="work/meilin-cashout.jpg" alt="Fast cashouts poster" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Fast cashouts</figcaption></figure>
-      <figure class="art reveal"><a href="work/meilin-legit.jpg"><img src="work/meilin-legit.jpg" alt="Meilin.ug is legit poster" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Trust campaign</figcaption></figure>
+      <figure class="art wide reveal"><a href="work/meilin-fixtures.webp"><img src="work/meilin-fixtures.webp" alt="UEFA Europa League fixtures poster" width="960" height="681" loading="lazy" decoding="async"></a><figcaption>Matchday fixtures</figcaption></figure>
+      <figure class="art reveal"><a href="work/meilin-oneapp.webp"><img src="work/meilin-oneapp.webp" alt="App launch poster" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>App launch</figcaption></figure>
+      <figure class="art reveal"><a href="work/meilin-odds.webp"><img src="work/meilin-odds.webp" alt="Get crazy odds poster" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Odds promo</figcaption></figure>
+      <figure class="art wide reveal"><a href="work/meilin-invite.webp"><img src="work/meilin-invite.webp" alt="Invite bonus poster" width="720" height="511" loading="lazy" decoding="async"></a><figcaption>Invite bonus</figcaption></figure>
+      <figure class="art reveal"><a href="work/meilin-cashout.webp"><img src="work/meilin-cashout.webp" alt="Fast cashouts poster" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Fast cashouts</figcaption></figure>
+      <figure class="art reveal"><a href="work/meilin-legit.webp"><img src="work/meilin-legit.webp" alt="Meilin.ug is legit poster" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Trust campaign</figcaption></figure>
     </div>
   </section>
 
   <!-- 04 Video -->
   <section class="panel opener reveal" id="video" aria-labelledby="h-video">
     <div><p class="num">04</p><h2 class="big" id="h-video">Video</h2><p class="spaced">Script, shoot, edit</p></div>
-    <div class="body"><p>Property films, app tutorials and launch teasers, from the script to the final edit.</p><ul><li><a href="#films"><b>Spacious Homes Uganda</b><span>Property film</span></a></li><li><a href="#films"><b>Meilin International</b><span>Tutorials, teasers and ads</span></a></li></ul></div>
+    <div class="body"><p>Property films, app tutorials and launch teasers, from the script to the final edit.</p><ul><li><a href="#films"><b>Ishita Properties</b><span>Property film</span></a></li><li><a href="#films"><b>Meilin International</b><span>Tutorials, teasers and ads</span></a></li></ul></div>
   </section>
 
   <section class="panel reveal" id="films" aria-labelledby="h-films">
     <div class="sheet-head">
       <h4 id="h-films">Films and reels</h4>
-      <p>As creative director at Spacious Homes I scripted, directed, shot and edited luxury property films for YouTube and social media. At Meilin I wrote and produced app tutorials and launch teasers. Each one plays on Google Drive.</p>
+      <p>As a creative director in real estate, at Ishita Properties and Spacious Homes, I scripted, directed, shot and edited luxury property films for YouTube and social media. At Meilin I wrote and produced app tutorials and launch teasers. Tap any reel to play it right here.</p>
     </div>
     <div class="reels">
-      <figure class="reel reveal"><a href="https://drive.google.com/file/d/17DEPW9W4LVSRDntmp2NnPq6sNQ8jPy5q/view" aria-label="Watch Luxury property walkthrough on Google Drive"><img src="work/reel-spacious.jpg" alt="Modern house exterior" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Spacious Homes Uganda</b>Luxury property walkthrough</figcaption></figure>
-      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1_c1A8Y2Jzc7S_RJ2naBnYowgrC1hEliw/view" aria-label="Watch How to deposit, an app tutorial on Google Drive"><img src="work/reel-deposit.jpg" alt="How to Deposit title card" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>How to deposit, an app tutorial</figcaption></figure>
-      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1HOPWI_gSCjtMvyfixywJTfcRDdLGIwGd/view" aria-label="Watch The wait is over, a launch teaser on Google Drive"><img src="work/reel-waitover.jpg" alt="Black and white clock" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>The wait is over, a launch teaser</figcaption></figure>
-      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1PcS8i7uzYI55xMREv_R9KcBX3ucizTEO/view" aria-label="Watch Referral ad on Google Drive"><img src="work/reel-referral.jpg" alt="Laughing man in glasses" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>Referral ad</figcaption></figure>
-      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1rXSiRHK-y3Bu3Lob_r_oy5nFiwQPh2Pp/view" aria-label="Watch Coming soon, a launch teaser on Google Drive"><img src="work/reel-comingsoon.jpg" alt="A lone chair under a spotlight" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>Coming soon, a launch teaser</figcaption></figure>
-      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1_DGyGH9EygAvcSZfzBPKLmrKnwjvzv_c/view" aria-label="Watch Physical club, a venue promo on Google Drive"><img src="work/reel-club.jpg" alt="Chips on a gaming table" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>Physical club, a venue promo</figcaption></figure>
+      <figure class="reel reveal"><a href="https://drive.google.com/file/d/17DEPW9W4LVSRDntmp2NnPq6sNQ8jPy5q/view" aria-label="Play Luxury property walkthrough"><img src="work/reel-spacious.webp" alt="Modern house exterior" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Ishita Properties</b>Luxury property walkthrough</figcaption></figure>
+      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1_c1A8Y2Jzc7S_RJ2naBnYowgrC1hEliw/view" aria-label="Play How to deposit, an app tutorial"><img src="work/reel-deposit.webp" alt="How to Deposit title card" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>How to deposit, an app tutorial</figcaption></figure>
+      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1HOPWI_gSCjtMvyfixywJTfcRDdLGIwGd/view" aria-label="Play The wait is over, a launch teaser"><img src="work/reel-waitover.webp" alt="Black and white clock" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>The wait is over, a launch teaser</figcaption></figure>
+      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1PcS8i7uzYI55xMREv_R9KcBX3ucizTEO/view" data-shape="wide" aria-label="Play Referral ad"><img src="work/reel-referral.webp" alt="Laughing man in glasses" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>Referral ad</figcaption></figure>
+      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1rXSiRHK-y3Bu3Lob_r_oy5nFiwQPh2Pp/view" aria-label="Play Coming soon, a launch teaser"><img src="work/reel-comingsoon.webp" alt="A lone chair under a spotlight" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>Coming soon, a launch teaser</figcaption></figure>
+      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1_DGyGH9EygAvcSZfzBPKLmrKnwjvzv_c/view" data-shape="wide" aria-label="Play Physical club, a venue promo"><img src="work/reel-club.webp" alt="Chips on a gaming table" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>Physical club, a venue promo</figcaption></figure>
     </div>
   </section>
 
@@ -619,7 +639,7 @@
   </section>
 
   <article class="panel card reveal" id="skyhunt" aria-labelledby="h-skyhunt">
-    <div class="shot"><img src="work/card-skyhunt.jpg" alt="" width="1440" height="900" loading="lazy" decoding="async"></div>
+    <div class="shot"><img src="work/card-skyhunt.webp" alt="" width="1100" height="688" loading="lazy" decoding="async"></div>
     <div class="copy">
       <p class="kind">Browser game</p>
       <h3 id="h-skyhunt">Sky Hunt</h3>
@@ -628,7 +648,7 @@
     </div>
   </article>
   <article class="panel card reveal" id="ams" aria-labelledby="h-ams">
-    <div class="shot"><img src="work/card-ams.jpg" alt="" width="1440" height="900" loading="lazy" decoding="async"></div>
+    <div class="shot"><img src="work/card-ams.webp" alt="" width="1100" height="688" loading="lazy" decoding="async"></div>
     <div class="copy">
       <p class="kind">Trading strategy research</p>
       <h3 id="h-ams">AMS Scalper</h3>
@@ -690,9 +710,15 @@
       <span><svg aria-hidden="true"><use href="#i-pin"/></svg>Kampala, Uganda</span>
     </div>
     </div>
-    <figure class="duotone"><img src="img/joshua-suit.jpg" alt="Joshua Magembe in a suit" width="640" height="800" loading="lazy" decoding="async"></figure>
+    <figure class="duotone"><img src="img/joshua-suit-duotone.webp" alt="Joshua Magembe in a suit" width="640" height="800" loading="lazy" decoding="async"></figure>
   </section>
 </main>
+
+<dialog class="player" id="player" aria-label="Video player">
+  <button class="player-close" type="button" aria-label="Close video">&times;</button>
+  <div class="player-frame"><iframe title="Video" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+  <p class="player-caption"></p>
+</dialog>
 
 <script>
   // Reveal panels and the items inside them as they scroll into view; siblings cascade.
@@ -785,6 +811,35 @@
         ticking = false;
       });
     }, { passive: true });
+  })();
+
+  // Reels open in an on-page player instead of leaving for Google Drive.
+  (function () {
+    var player = document.getElementById("player");
+    if (!player || typeof player.showModal !== "function") return;
+    var frame = player.querySelector("iframe"), caption = player.querySelector(".player-caption");
+    var close = function () { player.close(); };
+    document.querySelectorAll(".reel a").forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        var id = (link.getAttribute("href").match(/\/d\/([^/]+)/) || [])[1];
+        if (!id) return;
+        e.preventDefault();
+        var fig = link.closest(".reel").querySelector("figcaption");
+        player.className = "player " + (link.dataset.shape === "wide" ? "wide" : "tall");
+        caption.innerHTML = fig ? fig.innerHTML : "";
+        frame.title = link.getAttribute("aria-label") || "Video";
+        frame.src = "https://drive.google.com/file/d/" + id + "/preview";
+        document.documentElement.style.overflow = "hidden";
+        player.showModal();
+      });
+    });
+    player.querySelector(".player-close").addEventListener("click", close);
+    // A click on the dimmed backdrop (outside the video) closes it too.
+    player.addEventListener("click", function (e) { if (e.target === player) close(); });
+    player.addEventListener("close", function () {
+      frame.src = "about:blank";
+      document.documentElement.style.overflow = "";
+    });
   })();
 </script>
 </body>
