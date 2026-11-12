@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Services and rates | Joshua Magembe</title>
+<meta name="description" content="Monthly design, video and marketing support from Joshua Magembe in Kampala: up to 8 hours a day, Monday to Friday, for one fixed monthly fee.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314281F'/%3E%3Crect x='7' y='17' width='18' height='7' fill='%23E8A317'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='800' font-size='17' text-anchor='middle' fill='%23F3F5EF'%3EJM%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.classList.add("js")</script>
+<style>
+  /* Same type, colours and shapes as the portfolio (index.html), so this page reads as part of it. */
+  @font-face {
+    font-family: "Bricolage Grotesque";
+    src: url("fonts/bricolage-grotesque-latin.woff2") format("woff2");
+    font-weight: 200 800; font-stretch: 75% 100%; font-style: normal; font-display: swap;
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  :root {
+    --paper: #F3F5EF; --panel: #E6EAE2; --ink: #14281F; --ink-soft: #4A5D53; --leaf: #3D6B4F; --mango: #E8A317;
+    --rule: #CBD5C9; --card: #FFFFFF; --night: #14281F; --night-text: #F3F5EF; --focus: #1F6FEB;
+    --ease-out: cubic-bezier(.2, .7, .2, 1);
+    --r-panel: clamp(16px, 2.2vw, 28px); --r-media: clamp(10px, 1.2vw, 16px); --r-control: 10px;
+    /* Spacing used across the page: the inset inside panels, and the air between sections. */
+    --inset: clamp(1.5rem, 5vw, 4.5rem);
+    --air: clamp(4rem, 9vw, 7.5rem);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0F1A15; --panel: #17251E; --ink: #E9EFE6; --ink-soft: #A7B8AD; --leaf: #8CC2A0;
+      --rule: #2B3D34; --card: #1B2C24; --night: #0A130F; --focus: #7FB2FF;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0F1A15; --panel: #17251E; --ink: #E9EFE6; --ink-soft: #A7B8AD; --leaf: #8CC2A0;
+    --rule: #2B3D34; --card: #1B2C24; --night: #0A130F; --focus: #7FB2FF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Bricolage Grotesque", system-ui, sans-serif; font-size: 1.0625rem; line-height: 1.55; }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; height: auto; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+  [id] { scroll-margin-top: 1.5rem; }
+
+  .book { max-width: 84rem; margin: 0 auto; padding: 0 clamp(0.75rem, 2.5vw, 2rem) 2rem; }
+  .panel { position: relative; overflow: hidden; background: var(--panel); padding: var(--inset); border-radius: var(--r-panel); }
+  .night { background: var(--night); color: var(--night-text); }
+  /* Open sections sit straight on the page, lined up with the text inside the panels. */
+  .sec { padding: var(--air) var(--inset) 0; }
+
+  .masthead { max-width: 84rem; margin: 0 auto; padding: clamp(1rem, 2.5vw, 1.5rem) clamp(0.75rem, 2.5vw, 2rem); display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .masthead .name { font-weight: 700; text-decoration: none; white-space: nowrap; }
+  .masthead nav { display: flex; gap: 1.25rem; font-size: 0.95rem; }
+  .masthead nav a { color: var(--ink-soft); text-decoration: none; }
+  .masthead nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Type scale: one size per level, used the same way everywhere.
+     Level 1 is the hero headline, level 2 opens each section, level 3 names an item. */
+  .t1, .t2 { margin: 0; font-weight: 800; font-stretch: 75%; text-transform: uppercase; }
+  .t1 { font-size: clamp(2.7rem, 6.2vw, 5.75rem); line-height: 0.92; letter-spacing: -0.035em; }
+  .t2 { font-size: clamp(2.1rem, 4.4vw, 3.75rem); line-height: 0.95; letter-spacing: -0.03em; }
+  .t3 { margin: 0; font-size: clamp(1.2rem, 1.7vw, 1.4rem); line-height: 1.2; font-weight: 700; font-stretch: 88%; letter-spacing: -0.01em; }
+  .eyebrow { margin: 0 0 1.1rem; color: var(--mango); font-weight: 700; font-size: clamp(1rem, 1.3vw, 1.15rem); }
+  .lede { margin: 0; max-width: 34rem; font-size: clamp(1.1rem, 1.5vw, 1.25rem); line-height: 1.5; }
+
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.5rem; margin: 0; }
+  .btn { position: relative; isolation: isolate; overflow: hidden; display: inline-block; padding: 0.75rem 1.2rem; border: 0; border-radius: var(--r-control); background: var(--mango); color: #14281F; font: inherit; font-weight: 700; text-decoration: none; cursor: pointer; transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out); }
+  .btn::after { content: ""; position: absolute; z-index: -1; top: -20%; bottom: -20%; left: -60%; width: 45%; background: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.65), transparent); transform: skewX(-20deg); transition: left 700ms var(--ease-out); }
+  .btn:hover, .btn:focus-visible { transform: translateY(-2px); box-shadow: 0 0.6rem 1.4rem rgb(232 163 23 / 0.35); }
+  .btn:hover::after, .btn:focus-visible::after { left: 130%; }
+  .ghost { border: 0; padding: 0 0 3px; color: inherit; font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; background: linear-gradient(var(--mango), var(--mango)) 0 100% / 0 2px no-repeat, linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; transition: background-size 400ms var(--ease-out); }
+  .ghost:hover, .ghost:focus-visible { background-size: 100% 2px, 100% 1px; }
+  /* A contact link whose details have not been filled in yet (see CONTACT at the bottom of this file). */
+  [aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; }
+
+  /* 1. Hero: the offer on the left; on wide screens, the portrait from the portfolio on the right. */
+  .hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); align-items: center; gap: clamp(2rem, 5vw, 4.5rem); min-height: min(41rem, 52vw); padding-bottom: 0; }
+  .hero-copy { padding-bottom: var(--inset); }
+  .hero .lede { margin-top: clamp(1.25rem, 2.5vw, 1.75rem); color: rgb(243 245 239 / 0.85); }
+  .hero .lede b { color: var(--night-text); }
+  .hero .actions { margin-top: clamp(1.75rem, 3vw, 2.5rem); }
+  .hero .terms { margin: clamp(1.75rem, 3.5vw, 2.75rem) 0 0; padding-top: 1.1rem; border-top: 1px solid rgb(243 245 239 / 0.2); color: rgb(243 245 239 / 0.7); font-size: 0.95rem; }
+  .hero .terms span { white-space: nowrap; }
+  .hero .terms span + span::before { content: "·"; margin: 0 0.6em; color: var(--mango); font-weight: 800; }
+  .js .hero-copy > * { animation: rise 800ms var(--ease-out) both; }
+  .js .hero-copy > :nth-child(2) { animation-delay: 80ms; } .js .hero-copy > :nth-child(3) { animation-delay: 160ms; }
+  .js .hero-copy > :nth-child(4) { animation-delay: 240ms; } .js .hero-copy > :nth-child(5) { animation-delay: 320ms; }
+  @keyframes rise { from { opacity: 0; transform: translateY(24px); } }
+
+  .portrait { align-self: end; justify-self: center; width: min(100%, 27rem); margin: 0; }
+  .portrait .frame { position: relative; aspect-ratio: 4 / 5; overflow: hidden; }
+  .portrait .frame::before { content: ""; position: absolute; inset: 22% 1% 0; background: var(--mango); border-radius: 999px 999px 0 0; transform-origin: 50% 100%; }
+  .portrait img {
+    position: absolute; top: 2%; left: 50%; width: 90%; max-width: none; transform: translateX(-50%);
+    filter: grayscale(1) contrast(1.08);
+    /* Feather the photo's hard crop at the sides into the arch, as on the portfolio. */
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 11%, #000 89%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 11%, #000 89%, transparent 100%);
+    transition: filter 600ms ease-out;
+  }
+  .portrait:hover img { filter: grayscale(0.2) contrast(1.04); }
+  .js .portrait .frame::before { animation: grow 800ms var(--ease-out) 150ms backwards; }
+  .js .portrait img { animation: arrive 900ms var(--ease-out) 380ms backwards; }
+  @keyframes grow { from { transform: scaleY(0); } }
+  @keyframes arrive { from { opacity: 0; transform: translate(-50%, 8%); } }
+
+  /* Section heads: the level-2 heading on the left, one short line of context on the right. */
+  .sec-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: end; gap: 1rem clamp(1.5rem, 4vw, 3.5rem); margin-bottom: clamp(2rem, 4.5vw, 3.5rem); }
+  .sec-head p { margin: 0; max-width: 34rem; color: var(--ink-soft); font-size: clamp(1.05rem, 1.35vw, 1.15rem); }
+  .sec-head p b { color: var(--ink); }
+
+  .price { margin: 0; font-weight: 800; font-stretch: 78%; letter-spacing: -0.03em; line-height: 1; white-space: nowrap; }
+  .price small { margin-left: 0.12em; font-size: 0.42em; font-weight: 600; font-stretch: 100%; letter-spacing: 0; color: var(--ink-soft); }
+
+  /* 2. Monthly plans: the main offer. */
+  .plans { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2rem); }
+  .plan { display: flex; flex-direction: column; padding: clamp(1.5rem, 3.6vw, 3.25rem); border-radius: var(--r-panel); background: var(--panel); }
+  .plan.dark { background: var(--night); color: var(--night-text); }
+  .plan .kind { margin: 0 0 0.6rem; color: var(--leaf); font-weight: 700; font-size: 0.95rem; }
+  .plan.dark .kind { color: var(--mango); }
+  .plan .t3 { font-size: clamp(1.6rem, 2.8vw, 2.25rem); font-weight: 800; font-stretch: 76%; text-transform: uppercase; line-height: 0.95; letter-spacing: -0.02em; }
+  .plan .price { margin-top: 1rem; font-size: clamp(2.6rem, 5vw, 3.9rem); }
+  .plan.dark .price small { color: rgb(243 245 239 / 0.7); }
+  .plan .hours { margin: 0.6rem 0 0; color: var(--ink-soft); font-size: 0.95rem; }
+  .plan.dark .hours { color: rgb(243 245 239 / 0.7); }
+  .plan .sum { margin: clamp(1.25rem, 2.5vw, 1.75rem) 0 0; padding-top: clamp(1.25rem, 2.5vw, 1.75rem); border-top: 1px solid var(--rule); }
+  .plan.dark .sum { border-color: rgb(243 245 239 / 0.18); }
+  .plan ul { margin: 1rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.55rem; }
+  .plan li { position: relative; padding-left: 1.6rem; line-height: 1.4; }
+  .plan li::before { content: ""; position: absolute; left: 0.1rem; top: 0.45rem; width: 0.7rem; height: 0.38rem; border-left: 2px solid var(--mango); border-bottom: 2px solid var(--mango); transform: rotate(-45deg); }
+  .plan .actions { margin-top: auto; padding-top: clamp(1.75rem, 3vw, 2.5rem); }
+
+  /* 3. How it works */
+  .steps { margin: 0; padding: 0; list-style: none; counter-reset: step; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 4vw, 3.5rem); }
+  .steps li { counter-increment: step; padding-top: 1.25rem; border-top: 2px solid var(--ink); }
+  .steps li::before { content: counter(step, decimal-leading-zero); display: block; margin-bottom: 0.6rem; color: var(--leaf); font-weight: 700; }
+  .steps p { margin: 0.5rem 0 0; color: var(--ink-soft); }
+
+  /* 4. One-off tasks: each row opens its detail card. To change a price, edit it here and in DETAILS below. */
+  .tasks { margin: 0; padding: 0; list-style: none; border-top: 2px solid var(--ink); }
+  .tasks a { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 0.25rem clamp(1rem, 3vw, 2.5rem); padding: clamp(1rem, 1.8vw, 1.35rem) 0.25rem; border-bottom: 1px solid var(--rule); text-decoration: none; transition: background-color 200ms ease-out, padding 260ms var(--ease-out); }
+  .tasks a:hover, .tasks a:focus-visible { background: var(--panel); padding-inline: 1rem; }
+  .tasks .t3 { font-size: clamp(1.1rem, 1.6vw, 1.3rem); }
+  .tasks .sub { grid-column: 1; margin: 0.15rem 0 0; color: var(--ink-soft); font-size: 0.95rem; }
+  .tasks .price { grid-column: 2; grid-row: 1 / span 2; text-align: right; font-size: clamp(1.5rem, 2.6vw, 2.1rem); }
+  .tasks .more { grid-column: 3; grid-row: 1 / span 2; color: var(--leaf); font-weight: 700; font-size: 0.925rem; white-space: nowrap; }
+  .tasks .more::after { content: " \2192"; transition: margin 260ms var(--ease-out); }
+  .tasks a:hover .more::after { margin-left: 0.25rem; }
+
+  /* 5. Proof of work: one quiet band that hands over to the portfolio. */
+  .band { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem 2rem; margin-top: var(--air); padding-block: clamp(1.5rem, 3.5vw, 2.75rem); }
+  .band .t3 { font-size: clamp(1.3rem, 2.2vw, 1.75rem); }
+  .band p { margin: 0.3rem 0 0; color: var(--ink-soft); }
+
+  /* 6. Contact */
+  .contact { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); align-items: start; gap: clamp(2rem, 5vw, 4.5rem); margin-top: clamp(0.75rem, 1.5vw, 1.25rem); }
+  .contact .lede { margin-top: 1.1rem; max-width: 26rem; color: rgb(243 245 239 / 0.85); }
+  .reach { margin: clamp(1.75rem, 3.5vw, 2.5rem) 0 0; padding: 0; list-style: none; display: grid; gap: 0.65rem; }
+  .reach a { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 0.9rem; min-height: 4.25rem; padding: 0.8rem 1rem; border: 1px solid rgb(243 245 239 / 0.22); border-radius: var(--r-control); text-decoration: none; transition: border-color 200ms ease-out, background-color 200ms ease-out, transform 200ms var(--ease-out); }
+  .reach a:hover, .reach a:focus-visible { border-color: var(--mango); background: rgb(232 163 23 / 0.1); transform: translateX(4px); }
+  .reach a[aria-disabled="true"]:hover { border-color: rgb(243 245 239 / 0.22); background: none; transform: none; }
+  .reach svg { width: 1.5rem; height: 1.5rem; color: var(--mango); }
+  .reach b { display: block; font-size: 1.1rem; line-height: 1.2; }
+  .reach small { display: block; color: rgb(243 245 239 / 0.7); font-size: 0.9rem; line-height: 1.35; }
+  .reach .go { color: var(--mango); font-weight: 700; }
+
+  .quote { padding: clamp(1.25rem, 3vw, 2.25rem); border-radius: var(--r-media); background: var(--paper); color: var(--ink); }
+  .quote .t3 { font-size: clamp(1.3rem, 2.2vw, 1.75rem); }
+  .quote > p { margin: 0.3rem 0 1.5rem; color: var(--ink-soft); font-size: 0.95rem; }
+  .fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .field { display: grid; gap: 0.35rem; align-content: start; }
+  .field.wide { grid-column: 1 / -1; }
+  .field label { font-weight: 600; font-size: 0.925rem; }
+  .field label span { color: var(--ink-soft); font-weight: 400; }
+  .field input, .field select, .field textarea {
+    width: 100%; padding: 0.7rem 0.8rem; border: 1px solid var(--rule); border-radius: var(--r-control);
+    background: var(--card); color: var(--ink); font: inherit; font-size: 1rem;
+    transition: border-color 160ms ease-out, box-shadow 160ms ease-out;
+  }
+  .field textarea { min-height: 7rem; resize: vertical; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--leaf); box-shadow: 0 0 0 3px rgb(61 107 79 / 0.25); }
+  .field input:user-invalid, .field select:user-invalid, .field textarea:user-invalid { border-color: #B3261E; }
+  .quote .submit { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; margin-top: 1.25rem; }
+  .form-note { margin: 0; color: var(--ink-soft); font-size: 0.875rem; }
+  .form-note.ok { color: var(--leaf); font-weight: 600; }
+  .form-note.error { color: #B3261E; font-weight: 600; }
+  .quote .btn[disabled] { opacity: 0.7; cursor: progress; }
+  /* Spam trap: invisible to people, tempting to bots. */
+  .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  /* Detail card: one plan or task, opened over the page. */
+  .detail { width: min(36rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); padding: 0; border: 0; border-radius: var(--r-panel); background: var(--paper); color: var(--ink); box-shadow: 0 2rem 5rem rgb(0 0 0 / 0.45); overflow: auto; overscroll-behavior: contain; }
+  .detail::backdrop { background: rgb(10 15 12 / 0.72); backdrop-filter: blur(3px); }
+  .detail[open] { animation: pop 320ms var(--ease-out); }
+  .detail[open]::backdrop { animation: fade 320ms ease-out; }
+  @keyframes pop { from { opacity: 0; transform: translateY(18px) scale(0.98); } }
+  @keyframes fade { from { opacity: 0; } }
+  .d-head { position: relative; padding: clamp(1.5rem, 4vw, 2.25rem); padding-right: 4.5rem; background: var(--night); color: var(--night-text); }
+  .d-head .kind { margin: 0 0 0.5rem; color: var(--mango); font-weight: 700; font-size: 0.95rem; }
+  .d-head .t3 { font-size: clamp(1.6rem, 4.5vw, 2.25rem); font-weight: 800; font-stretch: 76%; text-transform: uppercase; line-height: 0.95; letter-spacing: -0.02em; }
+  .d-head .price { margin-top: 0.85rem; font-size: clamp(2.1rem, 6vw, 3rem); }
+  .d-head .price small { color: rgb(243 245 239 / 0.7); }
+  .d-head .sum { margin: 1rem 0 0; color: rgb(243 245 239 / 0.85); }
+  .d-close { position: absolute; top: 1rem; right: 1rem; width: 2.75rem; height: 2.75rem; border: 0; border-radius: 50%; background: var(--mango); color: #14281F; font: inherit; font-size: 1.6rem; line-height: 1; cursor: pointer; }
+  .d-close:hover { background: #F2B93A; }
+  .d-body { padding: clamp(1.5rem, 4vw, 2.25rem); display: grid; gap: 1.5rem; }
+  .d-body h3 { margin: 0 0 0.6rem; color: var(--leaf); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+  .d-body ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.5rem; }
+  .d-body li { position: relative; padding-left: 1.6rem; line-height: 1.45; }
+  .d-body li::before { content: ""; position: absolute; left: 0.1rem; top: 0.48rem; width: 0.7rem; height: 0.38rem; border-left: 2px solid var(--mango); border-bottom: 2px solid var(--mango); transform: rotate(-45deg); }
+  .d-body p { margin: 0; }
+  .d-body .note { padding: 0.8rem 0.95rem; border-left: 4px solid var(--mango); background: color-mix(in srgb, var(--mango) 13%, transparent); font-size: 0.95rem; }
+  .d-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.5rem; padding: 0 clamp(1.5rem, 4vw, 2.25rem) clamp(1.5rem, 4vw, 2.25rem); }
+
+  .colophon { max-width: 84rem; margin: 0 auto; padding: 0 calc(clamp(0.75rem, 2.5vw, 2rem) + var(--inset)) 2.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem; color: var(--ink-soft); font-size: 0.95rem; }
+  .colophon a { text-decoration: none; }
+  .colophon a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Scroll reveals, as on the portfolio. */
+  .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out); }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 900px) {
+    /* Phones and small tablets: the hero is words only. */
+    .hero { grid-template-columns: 1fr; min-height: 0; }
+    .portrait { display: none; }
+    .contact { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; gap: 1.75rem; }
+  }
+  @media (max-width: 680px) {
+    .masthead nav a.hide-sm { display: none; }
+    .sec-head, .plans { grid-template-columns: 1fr; }
+    .fields { grid-template-columns: 1fr; }
+    .hero .terms span { display: block; }
+    .hero .terms span + span::before { content: none; }
+    .tasks a { grid-template-columns: minmax(0, 1fr) auto; }
+    .tasks .more { grid-column: 1; grid-row: auto; margin-top: 0.35rem; }
+    .tasks .price { grid-row: 1 / span 3; }
+    /* On phones the card rises from the bottom like a sheet. */
+    .detail { width: 100vw; max-width: 100vw; max-height: 92dvh; margin: auto 0 0; border-radius: var(--r-panel) var(--r-panel) 0 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .js .hero-copy > *, .js .portrait .frame::before, .js .portrait img, .detail[open], .detail[open]::backdrop { animation: none; }
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+    .btn, .btn::after, .ghost, .reach a, .portrait img, .tasks a, .tasks .more::after { transition: none; }
+    .btn:hover, .reach a:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-4.2A8.5 8.5 0 1 1 20.5 11.5Z"/></symbol>
+  <symbol id="i-form" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+</svg>
+
+<header class="masthead">
+  <a class="name" href="index.html">Joshua Magembe</a>
+  <nav aria-label="Main">
+    <a href="index.html">Portfolio</a>
+    <a class="hide-sm" href="#plans">Plans</a>
+    <a class="hide-sm" href="#tasks">One-off tasks</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main class="book">
+
+  <!-- 1. Hero -->
+  <section class="panel night hero" aria-labelledby="h-hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Joshua Magembe · Monthly design and marketing support</p>
+      <h1 class="t1" id="h-hero">A designer and marketer on your team, every weekday</h1>
+      <p class="lede">I dedicate <b>up to 8 hours a day, Monday to Friday,</b> to your business, for one fixed monthly fee. That works out at about $2 an hour.</p>
+      <p class="actions">
+        <a class="btn" href="#plans">See the monthly plans</a>
+        <a class="ghost" href="#quote">Request a quote</a>
+      </p>
+      <p class="terms"><span>Plans from $300 a month</span><span>Scope agreed up front</span><span>One-off tasks too</span></p>
+    </div>
+    <figure class="portrait">
+      <div class="frame"><img src="img/joshua-cutout.webp" alt="Joshua Magembe" width="640" height="1130" fetchpriority="high"></div>
+    </figure>
+  </section>
+
+  <!-- 2. Monthly plans: the main offer. Prices are also in DETAILS at the bottom of this file. -->
+  <section class="sec reveal" id="plans" aria-labelledby="h-plans">
+    <div class="sec-head">
+      <h2 class="t2" id="h-plans">Monthly plans</h2>
+      <p>One fixed fee each month for <b>up to 8 hours a day, Monday to Friday.</b> We agree the scope and priorities at the start. It isn't unlimited work, but the mix of tasks can shift as the month goes on.</p>
+    </div>
+    <div class="plans">
+      <article class="plan dark">
+        <p class="kind">Monthly plan</p>
+        <h3 class="t3">Social Media Support</h3>
+        <p class="price">$325<small>/month</small></p>
+        <p class="hours">Up to 8 hours a day, Monday to Friday</p>
+        <p class="sum">Your social media handled for the month: planned, designed, edited, written, posted and reviewed.</p>
+        <ul>
+          <li>Up to two platforms</li>
+          <li>Roughly 20 to 30 content pieces a month</li>
+          <li>Design, reels, captions and scheduling</li>
+          <li>A monthly performance review</li>
+        </ul>
+        <p class="actions">
+          <a class="btn" href="#social-media-support" data-detail="social-media-support">What you get</a>
+          <a class="ghost" href="#quote" data-pick="Social Media Support plan">Start with this plan</a>
+        </p>
+      </article>
+      <article class="plan">
+        <p class="kind">Monthly plan</p>
+        <h3 class="t3">Remote Marketing Assistant</h3>
+        <p class="price">$300<small>/month</small></p>
+        <p class="hours">Up to 8 hours a day, Monday to Friday</p>
+        <p class="sum">An extra pair of hands for marketing and admin: research, outreach, email and updates.</p>
+        <ul>
+          <li>Lead generation and prospect research</li>
+          <li>Email marketing assistance</li>
+          <li>Competitor and market research</li>
+          <li>Weekly progress updates</li>
+        </ul>
+        <p class="actions">
+          <a class="btn" href="#remote-marketing-assistant" data-detail="remote-marketing-assistant">What you get</a>
+          <a class="ghost" href="#quote" data-pick="Remote Marketing Assistant plan">Start with this plan</a>
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 3. How it works -->
+  <section class="sec reveal" id="how" aria-labelledby="h-how">
+    <div class="sec-head">
+      <h2 class="t2" id="h-how">How it works</h2>
+      <p>I'm based in Kampala, on East Africa Time (UTC+3), and work Monday to Friday.</p>
+    </div>
+    <ol class="steps">
+      <li><h3 class="t3">Tell me about your business</h3><p>Send a quote request, an email or a WhatsApp message with what you need.</p></li>
+      <li><h3 class="t3">We agree the month</h3><p>We set the scope and priorities together, so you know what the fee covers before work starts.</p></li>
+      <li><h3 class="t3">I get to work</h3><p>Up to 8 hours a day on your business, with the updates that come with your plan.</p></li>
+    </ol>
+  </section>
+
+  <!-- 4. One-off tasks: second to the plans. Each row opens its detail card. -->
+  <section class="sec reveal" id="tasks" aria-labelledby="h-tasks">
+    <div class="sec-head">
+      <h2 class="t2" id="h-tasks">One-off tasks</h2>
+      <p>Not ready for a monthly plan? Book a single task instead. Tap any one to see what's included.</p>
+    </div>
+    <ul class="tasks">
+      <li><a href="#graphic-design" data-detail="graphic-design"><h3 class="t3">Graphic design</h3><p class="sub">Posts, flyers, posters and brand graphics</p><p class="price">$2<small>/hour</small></p><span class="more">Details</span></a></li>
+      <li><a href="#social-media-hourly" data-detail="social-media-hourly"><h3 class="t3">Social media support</h3><p class="sub">Planning, captions, scheduling and page monitoring</p><p class="price">$2<small>/hour</small></p><span class="more">Details</span></a></li>
+      <li><a href="#reels" data-detail="reels"><h3 class="t3">Reels and short-form video</h3><p class="sub">Short vertical videos, cut and captioned</p><p class="price">$5<small>/video</small></p><span class="more">Details</span></a></li>
+      <li><a href="#video-editing" data-detail="video-editing"><h3 class="t3">Hourly video editing</h3><p class="sub">Longer or regular video work, one-month minimum</p><p class="price">$2<small>/hour</small></p><span class="more">Details</span></a></li>
+      <li><a href="#seo-audit" data-detail="seo-audit"><h3 class="t3">SEO audit</h3><p class="sub">A written review with fixes in order of priority</p><p class="price">$10<small>/audit</small></p><span class="more">Details</span></a></li>
+      <li><a href="#website-design" data-detail="website-design"><h3 class="t3">Website design</h3><p class="sub">Designed and built, hourly or at a fixed price</p><p class="price">$7–$10<small>/hour</small></p><span class="more">Details</span></a></li>
+      <li><a href="#additional-services" data-detail="additional-services"><h3 class="t3">Additional services</h3><p class="sub">Email, leads, research, admin and content</p><p class="price">$1–$2<small>/hour</small></p><span class="more">Details</span></a></li>
+    </ul>
+  </section>
+
+  <!-- 5. Proof of work: hand over to the portfolio instead of repeating it -->
+  <section class="panel band reveal" id="proof" aria-labelledby="h-proof">
+    <div>
+      <h2 class="t3" id="h-proof">See the work first</h2>
+      <p>Campaigns, videos and websites I've made for businesses in Kampala.</p>
+    </div>
+    <a class="btn" href="index.html">Open the portfolio</a>
+  </section>
+
+  <!-- 6. Contact: email, WhatsApp, or the quote form -->
+  <section class="panel night contact reveal" id="contact" aria-labelledby="h-contact">
+    <div>
+      <h2 class="t2" id="h-contact">Let's talk</h2>
+      <p class="lede">Tell me what you need help with, whichever way is easiest for you.</p>
+      <ul class="reach">
+        <li><a data-contact="email" href="mailto:joshua.m7733@gmail.com">
+          <svg aria-hidden="true"><use href="#i-mail"/></svg>
+          <span><b>Email</b><small>Opens your email app with a message started</small></span>
+          <span class="go" aria-hidden="true">&rarr;</span>
+        </a></li>
+        <li><a data-contact="whatsapp" href="#contact">
+          <svg aria-hidden="true"><use href="#i-chat"/></svg>
+          <span><b>WhatsApp</b><small>Opens a chat with a message started</small></span>
+          <span class="go" aria-hidden="true">&rarr;</span>
+        </a></li>
+        <li><a href="#quote">
+          <svg aria-hidden="true"><use href="#i-form"/></svg>
+          <span><b>Request a quote</b><small>Fill in the form and I'll reply by email</small></span>
+          <span class="go" aria-hidden="true">&rarr;</span>
+        </a></li>
+      </ul>
+    </div>
+
+    <form class="quote" id="quote" novalidate>
+      <h3 class="t3" id="h-quote">Request a quote</h3>
+      <p>Share a few details and I'll reply with a price and a start date.</p>
+      <div class="fields">
+        <div class="field"><label for="q-name">Your name</label><input id="q-name" name="name" type="text" autocomplete="name" required></div>
+        <div class="field"><label for="q-email">Email address</label><input id="q-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field wide"><label for="q-business">Business name</label><input id="q-business" name="business" type="text" autocomplete="organization" required></div>
+        <div class="field"><label for="q-service">Service required</label>
+          <select id="q-service" name="service" required>
+            <option value="">Choose one</option>
+            <optgroup label="Monthly plans">
+              <option>Social Media Support plan</option>
+              <option>Remote Marketing Assistant plan</option>
+            </optgroup>
+            <optgroup label="One-off tasks">
+              <option>Graphic design</option>
+              <option>Social media support</option>
+              <option>Reels and short-form video</option>
+              <option>Hourly video editing</option>
+              <option>SEO audit</option>
+              <option>Website design</option>
+              <option>Additional services</option>
+            </optgroup>
+            <option>Not sure yet</option>
+          </select></div>
+        <div class="field"><label for="q-engagement">Preferred way of working</label>
+          <select id="q-engagement" name="engagement" required>
+            <option value="">Choose one</option>
+            <option>Monthly plan</option>
+            <option>One-off task</option>
+            <option>Fixed-price project</option>
+            <option>Not sure yet</option>
+          </select></div>
+        <div class="field wide"><label for="q-budget">Budget <span>(optional)</span></label>
+          <select id="q-budget" name="budget">
+            <option value="">Not sure yet</option>
+            <option>Under $50</option>
+            <option>$50 to $150</option>
+            <option>$150 to $350</option>
+            <option>Over $350</option>
+          </select></div>
+        <div class="trap" aria-hidden="true"><label for="q-website">Website</label><input id="q-website" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
+        <div class="field wide"><label for="q-details">Project description</label><textarea id="q-details" name="details" required placeholder="What do you need done, and by when?"></textarea></div>
+      </div>
+      <div class="submit">
+        <button class="btn" type="submit">Send enquiry</button>
+        <p class="form-note" id="q-note" aria-live="polite">Goes straight to my inbox.</p>
+      </div>
+    </form>
+  </section>
+</main>
+
+<footer class="colophon">
+  <span>Joshua Magembe, Kampala, Uganda</span>
+  <a href="index.html">Back to the portfolio</a>
+</footer>
+
+<!-- The detail card. Its words come from DETAILS in the script below. -->
+<dialog class="detail" id="detail" aria-labelledby="d-title">
+  <header class="d-head">
+    <p class="kind" id="d-kind"></p>
+    <h2 class="t3" id="d-title"></h2>
+    <p class="price" id="d-price"></p>
+    <p class="sum" id="d-sum"></p>
+    <button class="d-close" type="button" aria-label="Close">&times;</button>
+  </header>
+  <div class="d-body">
+    <section><h3>What you get</h3><ul id="d-get"></ul></section>
+    <section><h3>How it saves you time and money</h3><ul id="d-help"></ul></section>
+    <section><h3>Good for</h3><p id="d-for"></p></section>
+    <p class="note" id="d-note" hidden></p>
+  </div>
+  <footer class="d-foot">
+    <a class="btn" href="#quote" id="d-ask">Ask about this</a>
+    <button class="ghost" type="button" id="d-back">Back to the page</button>
+  </footer>
+</dialog>
+
+<script>
+  // ---------------------------------------------------------------------------
+  // CONTACT DETAILS: the only place to change them.
+  // ---------------------------------------------------------------------------
+  var CONTACT = {
+    // The address already shown on the portfolio. Confirm it, or replace it.
+    email: "joshua.m7733@gmail.com",
+    // PLACEHOLDER. Your WhatsApp number with country code, digits only (no +, spaces or dashes),
+    // for example "2567XXXXXXXX". While this is empty the WhatsApp link is switched off.
+    whatsapp: "",
+    emailSubject: "Enquiry about your services",
+    emailBody: "Hi Joshua,\n\nI'd like to ask about your services.\n\nBusiness:\nWhat I need help with:\n",
+    whatsappMessage: "Hi Joshua, I saw your services page and I'd like to ask about "
+  };
+
+  // ---------------------------------------------------------------------------
+  // DETAIL CARDS: the words shown when someone taps a plan or a task.
+  // "pick" is the option chosen in the quote form when they tap "Ask about this".
+  // ---------------------------------------------------------------------------
+  var DETAILS = {
+    "social-media-support": {
+      kind: "Monthly plan", title: "Social Media Support", price: "$325", unit: "/month",
+      pick: "Social Media Support plan", way: "Monthly plan",
+      sum: "Your social media handled for the month: planned, designed, edited, written, posted and reviewed.",
+      get: [
+        "Up to 8 hours a day, Monday to Friday, on your pages",
+        "Support for up to two social media platforms",
+        "Content planning and calendar management",
+        "Graphic design and branded content",
+        "Reels and short-form video editing",
+        "Captions and content writing",
+        "Scheduling and publishing",
+        "Basic community engagement and page monitoring",
+        "A monthly performance review"
+      ],
+      help: [
+        "One monthly fee covers design, video, captions and posting, so you don't have to find and brief a different freelancer for each.",
+        "Your pages keep posting on a plan, without you having to find the time.",
+        "The monthly review shows what worked, so each month's content builds on the last."
+      ],
+      good: "Businesses and agencies that need steady, on-brand content on one or two platforms.",
+      note: "The aim is roughly 20 to 30 content pieces a month, depending on how complex they are and the materials you can share."
+    },
+    "remote-marketing-assistant": {
+      kind: "Monthly plan", title: "Remote Marketing Assistant", price: "$300", unit: "/month",
+      pick: "Remote Marketing Assistant plan", way: "Monthly plan",
+      sum: "An extra pair of hands for marketing and admin: research, outreach, email and updates.",
+      get: [
+        "Up to 8 hours a day, Monday to Friday, on your tasks",
+        "Lead generation and prospect research",
+        "Email marketing assistance",
+        "Competitor and market research",
+        "Website and content updates",
+        "Virtual assistance and administrative tasks",
+        "Social media administration",
+        "Weekly progress updates"
+      ],
+      help: [
+        "Hand off the research and admin that fills your day, and spend that time on clients and sales.",
+        "A fixed price each month, so you know the cost before the month starts.",
+        "Weekly updates show what has been done, so nothing needs chasing."
+      ],
+      good: "Founders, small teams and agencies who need reliable help across many small marketing tasks.",
+      note: "We agree the month's priorities at the start. It isn't unlimited work, but the mix of tasks can shift as the month goes on."
+    },
+    "graphic-design": {
+      kind: "One-off task", title: "Graphic design", price: "$2", unit: "/hour",
+      pick: "Graphic design", way: "One-off task",
+      sum: "Designs for social media, print and your brand, billed by the hour.",
+      get: [
+        "Social media posts and carousels",
+        "Flyers, posters and banners",
+        "Brand graphics in your colours and fonts",
+        "Files sized for where they'll be used"
+      ],
+      help: [
+        "You pay only for the hours a design takes.",
+        "Everything follows your brand, so your posts and print look like they belong together."
+      ],
+      good: "One-off designs, or extra design work when your team is stretched."
+    },
+    "social-media-hourly": {
+      kind: "One-off task", title: "Social media support", price: "$2", unit: "/hour",
+      pick: "Social media support", way: "One-off task",
+      sum: "Help with your pages when you need it, without a monthly plan.",
+      get: [
+        "Content planning",
+        "Captions and short copy",
+        "Scheduling posts",
+        "Page monitoring"
+      ],
+      help: [
+        "Pay by the hour for the help you need, with no monthly commitment.",
+        "A quick way to catch up on a backlog or cover a busy week."
+      ],
+      good: "Businesses that post themselves but need help at busy times. For ongoing help, the Social Media Support plan covers more for one fee."
+    },
+    "reels": {
+      kind: "One-off task", title: "Reels and short-form video", price: "$5", unit: "/video",
+      pick: "Reels and short-form video", way: "One-off task",
+      sum: "Your footage turned into short vertical videos for social media.",
+      get: [
+        "Your clips cut into a short vertical video",
+        "Captions and text on screen",
+        "Sized for Instagram Reels, TikTok and YouTube Shorts"
+      ],
+      help: [
+        "A fixed price per video, so you know the cost before you start.",
+        "Footage you already have becomes posts you can use."
+      ],
+      good: "Businesses and creators with footage that needs turning into regular posts."
+    },
+    "video-editing": {
+      kind: "One-off task", title: "Hourly video editing", price: "$2", unit: "/hour",
+      pick: "Hourly video editing", way: "One-off task",
+      sum: "Editing for longer or regular video work, billed by the hour.",
+      get: [
+        "Editing longer videos, such as YouTube videos, adverts or event films",
+        "Regular editing on a schedule you set",
+        "Captions, titles and simple motion graphics"
+      ],
+      help: [
+        "A steady editor at an hourly rate, without a full-time hire.",
+        "You send the footage and get finished videos back."
+      ],
+      good: "Businesses and creators who publish video regularly.",
+      note: "Hourly video editing has a minimum commitment of one month."
+    },
+    "seo-audit": {
+      kind: "One-off task", title: "SEO audit", price: "$10", unit: "/audit",
+      pick: "SEO audit", way: "One-off task",
+      sum: "A written review of what is holding your website back in search.",
+      get: [
+        "A check of your site's search basics, such as page titles, descriptions, headings, speed and how it works on phones",
+        "A written report of what to fix",
+        "Fixes listed in order of priority"
+      ],
+      help: [
+        "You know what to fix first, before you spend money on adverts or a redesign.",
+        "A fixed price for the whole audit."
+      ],
+      good: "Any business with a website that isn't bringing in visitors from search."
+    },
+    "website-design": {
+      kind: "One-off task", title: "Website design", price: "$7–$10", unit: "/hour",
+      pick: "Website design", way: "Fixed-price project",
+      sum: "A website designed and built for your business, by the hour or for a fixed price.",
+      get: [
+        "Website design and build",
+        "Pages that work on phones, tablets and computers",
+        "Hourly work, or one fixed price agreed before work starts"
+      ],
+      help: [
+        "With a fixed price, you know the full cost before work begins.",
+        "One person handles both the design and the build, so nothing is lost in between."
+      ],
+      good: "Business websites, landing pages and portfolio sites. See the portfolio for websites I've made."
+    },
+    "additional-services": {
+      kind: "One-off task", title: "Additional services", price: "$1–$2", unit: "/hour",
+      pick: "Additional services", way: "One-off task",
+      sum: "Help with the everyday marketing and admin tasks that take up your time.",
+      get: [
+        "Email marketing",
+        "Lead generation",
+        "Virtual assistance",
+        "Website and content management",
+        "Competitor research",
+        "Business and market research",
+        "Content creation"
+      ],
+      help: [
+        "A low hourly rate for tasks that don't need a specialist's fee.",
+        "Hand these off and keep your own hours for the work only you can do."
+      ],
+      good: "Small businesses and agencies with a backlog of smaller tasks. For regular help, the Remote Marketing Assistant plan covers these for one monthly fee.",
+      note: "The exact rate depends on the task. I'll confirm it before any work starts."
+    }
+  };
+
+  // Email and WhatsApp links, each opening with a message already started.
+  (function () {
+    var mail = "mailto:" + CONTACT.email + "?subject=" + encodeURIComponent(CONTACT.emailSubject) + "&body=" + encodeURIComponent(CONTACT.emailBody);
+    document.querySelectorAll('[data-contact="email"]').forEach(function (a) { a.href = mail; });
+    var number = CONTACT.whatsapp.replace(/\D/g, "");
+    document.querySelectorAll('[data-contact="whatsapp"]').forEach(function (a) {
+      if (number) {
+        a.href = "https://wa.me/" + number + "?text=" + encodeURIComponent(CONTACT.whatsappMessage);
+        a.target = "_blank";
+        a.rel = "noopener";
+        return;
+      }
+      a.setAttribute("aria-disabled", "true");
+      a.title = "WhatsApp number not added yet";
+      var hint = a.querySelector("small");
+      if (hint) hint.textContent = "Number not added yet";
+      a.addEventListener("click", function (e) { e.preventDefault(); });
+    });
+  })();
+
+  // Choosing a plan or task fills in the quote form.
+  var service = document.getElementById("q-service"), engagement = document.getElementById("q-engagement");
+  function pick(serviceName, way) {
+    service.value = serviceName;
+    engagement.value = way || (/plan$/.test(serviceName) ? "Monthly plan" : "One-off task");
+  }
+  document.querySelectorAll("[data-pick]").forEach(function (link) {
+    link.addEventListener("click", function () { pick(link.dataset.pick); });
+  });
+
+  // Detail cards open over the page. Each has its own link (services.html#seo-audit) that can be shared.
+  (function () {
+    var dialog = document.getElementById("detail");
+    if (typeof dialog.showModal !== "function") return; // Very old browsers: the rows simply do nothing.
+    var $ = function (id) { return document.getElementById(id); };
+    var current = null, opener = null;
+    var fillList = function (ul, items) {
+      ul.textContent = "";
+      items.forEach(function (text) { var li = document.createElement("li"); li.textContent = text; ul.appendChild(li); });
+    };
+    function open(key, from) {
+      var d = DETAILS[key];
+      if (!d) return false;
+      current = key; opener = from || null;
+      $("d-kind").textContent = d.kind;
+      $("d-title").textContent = d.title;
+      $("d-price").textContent = d.price;
+      var unit = document.createElement("small"); unit.textContent = d.unit; $("d-price").appendChild(unit);
+      $("d-sum").textContent = d.sum;
+      fillList($("d-get"), d.get);
+      fillList($("d-help"), d.help);
+      $("d-for").textContent = d.good;
+      $("d-note").hidden = !d.note;
+      $("d-note").textContent = d.note || "";
+      if (!dialog.open) dialog.showModal();
+      dialog.scrollTop = 0;
+      if (location.hash !== "#" + key) history.replaceState(null, "", "#" + key);
+      return true;
+    }
+    function close() { if (dialog.open) dialog.close(); }
+    document.querySelectorAll("[data-detail]").forEach(function (link) {
+      link.addEventListener("click", function (e) { if (open(link.dataset.detail, link)) e.preventDefault(); });
+    });
+    dialog.addEventListener("close", function () {
+      history.replaceState(null, "", location.pathname + location.search);
+      if (opener) opener.focus();
+    });
+    dialog.querySelector(".d-close").addEventListener("click", close);
+    $("d-back").addEventListener("click", close);
+    // A click on the dimmed backdrop (outside the card) closes it too.
+    dialog.addEventListener("click", function (e) { if (e.target === dialog) close(); });
+    $("d-ask").addEventListener("click", function (e) {
+      e.preventDefault();
+      var d = DETAILS[current];
+      opener = null;
+      close();
+      pick(d.pick, d.way);
+      document.getElementById("quote").scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(function () { document.getElementById("q-name").focus({ preventScroll: true }); }, 450);
+    });
+    // Opening a shared link like services.html#seo-audit shows that card straight away.
+    var fromHash = function () { var key = location.hash.slice(1); if (DETAILS[key]) open(key); };
+    fromHash();
+    window.addEventListener("hashchange", fromHash);
+  })();
+
+  // Reveal sections as they scroll into view.
+  (function () {
+    var items = document.querySelectorAll(".reveal");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+      items.forEach(function (el) { el.classList.add("in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("in");
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    items.forEach(function (el) { io.observe(el); });
+  })();
+
+  // Quote form: posts to Web3Forms, the same service as the portfolio's form, which emails the enquiry to Joshua.
+  // Stage 2 adds a second step here that also saves each enquiry to the Google Sheets CRM.
+  (function () {
+    // Public form key from web3forms.com. It only allows sending messages to Joshua's inbox.
+    var ACCESS_KEY = "23552ab1-bde0-4402-b58f-8aa501750e9d";
+    var form = document.getElementById("quote");
+    var note = document.getElementById("q-note");
+    var button = form.querySelector("button[type=submit]");
+    var say = function (text, kind) { note.textContent = text; note.className = "form-note" + (kind ? " " + kind : ""); };
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var f = form.elements;
+      if (f._honey.value) return;
+      if (!form.checkValidity()) {
+        say("Please fill in the highlighted fields.", "error");
+        form.reportValidity();
+        return;
+      }
+      var data = {
+        access_key: ACCESS_KEY,
+        subject: "Services enquiry: " + f.service.value + " for " + f.business.value.trim(),
+        from_name: "Services page enquiry",
+        name: f.name.value.trim(),
+        email: f.email.value.trim(),
+        business: f.business.value.trim(),
+        service: f.service.value,
+        engagement: f.engagement.value,
+        budget: f.budget.value || "Not sure yet",
+        message: f.details.value.trim()
+      };
+      button.disabled = true;
+      button.textContent = "Sending...";
+      say("");
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(data)
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+          if (!res.success) throw new Error(res.message || "Not sent");
+          form.reset();
+          say("Thanks, your enquiry is on its way. I'll reply to the email you gave.", "ok");
+        })
+        .catch(function () {
+          say("That didn't send. Please try again, or email " + CONTACT.email + ".", "error");
+        })
+        .then(function () { button.disabled = false; button.textContent = "Send enquiry"; });
+    });
+  })();
+</script>
+</body>
+</html>
