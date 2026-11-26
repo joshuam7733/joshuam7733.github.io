@@ -239,7 +239,7 @@
   .player.tall .player-frame { height: min(82vh, 52rem); aspect-ratio: 9 / 16; max-width: 92vw; }
   .player.wide .player-frame { width: min(92vw, 70rem); aspect-ratio: 16 / 9; max-height: 78vh; }
   .player-frame::before { content: "Loading video..."; position: absolute; inset: 0; display: grid; place-items: center; color: #A7B8AD; font-size: 0.95rem; }
-  .player iframe { position: relative; width: 100%; height: 100%; border: 0; }
+  .player iframe, .player video { position: relative; display: block; width: 100%; height: 100%; border: 0; background: #0A0F0C; }
   .player-caption { margin: 0.75rem 0 0; color: #E9EFE6; font-size: 0.95rem; }
   .player-caption b { color: var(--mango); }
   .player-close {
@@ -361,10 +361,10 @@
   <!-- 1. Cover -->
   <section class="panel night cover" aria-label="Cover">
     <div class="cover-copy">
-      <p class="role">Designer &amp; builder, Kampala</p>
+      <p class="role">Designer, editor and developer</p>
       <h1 class="big">Portfolio</h1>
       <p class="owner">Joshua Magembe</p>
-      <p class="statement">I design and build for how Kampala <a href="#zawli">eats</a>, <a href="#kazi">works</a>, <a href="#dropoff">moves</a> and <a href="#stackd">plays</a>.</p>
+      <p class="statement">I <a href="#brand">design</a> and <a href="#product">build</a> digital products, from first sketch to working code, and <a href="#video">edit</a> the films that launch them.</p>
     </div>
     <div class="fan" aria-hidden="true">
       <figure class="phone p1"><img src="work/zawli-menu.webp" alt="" width="390" height="844" fetchpriority="high"></figure>
@@ -439,7 +439,7 @@
         <li><a href="#product"><b>Product design</b><span>Zawli, KAZI, Drop Off, STACKD, Paylink</span></a></li>
         <li><a href="#client"><b>Client websites</b><span>LinusTats, Uplex &amp; Associates, SHY Kampala, Dr. Smiles Uganda</span></a></li>
         <li><a href="#brand"><b>Brand and campaigns</b><span>Uplex &amp; Associates, Meilin International</span></a></li>
-        <li><a href="#video"><b>Video</b><span>Ishita Properties, Meilin International</span></a></li>
+        <li><a href="#video"><b>Video</b><span>Ishita Properties, Meilin International, STACKD, Zawli</span></a></li>
         <li><a href="#experiments"><b>Experiments</b><span>Sky Hunt, AMS Scalper, Many Mansions</span></a></li>
       </ol>
     </div>
@@ -664,21 +664,21 @@
   <!-- 04 Video -->
   <section class="panel opener reveal" id="video" aria-labelledby="h-video">
     <div><p class="num">04</p><h2 class="big" id="h-video">Video</h2><p class="spaced">Script, shoot, edit</p></div>
-    <div class="body"><p>Property films, app tutorials and launch teasers, from the script to the final edit.</p><ul><li><a href="#films"><b>Ishita Properties</b><span>Property film</span></a></li><li><a href="#films"><b>Meilin International</b><span>Tutorials, teasers and ads</span></a></li></ul></div>
+    <div class="body"><p>Property films, game promos and product launch films, from the script to the final edit.</p><ul><li><a href="#films"><b>Ishita Properties</b><span>Property film</span></a></li><li><a href="#films"><b>Meilin International</b><span>Game promos</span></a></li><li><a href="#films"><b>STACKD and Zawli</b><span>Product launch films</span></a></li></ul></div>
   </section>
 
   <section class="panel reveal" id="films" aria-labelledby="h-films">
     <div class="sheet-head">
       <h4 id="h-films">Films and reels</h4>
-      <p>As a creative director in real estate, at Ishita Properties and Spacious Homes, I scripted, directed, shot and edited luxury property films for YouTube and social media. At Meilin I wrote and produced app tutorials and launch teasers. Tap any reel to play it right here.</p>
+      <p>As a creative director in real estate, at Ishita Properties and Spacious Homes, I scripted, directed, shot and edited luxury property films for YouTube and social media. At Meilin I made promos for the casino's games, and I made launch films for STACKD and Zawli, two products I designed and built. Tap any reel to play it right here.</p>
     </div>
     <div class="reels">
       <figure class="reel reveal"><a href="https://drive.google.com/file/d/17DEPW9W4LVSRDntmp2NnPq6sNQ8jPy5q/view" aria-label="Play Luxury property walkthrough"><img src="work/reel-spacious.webp" alt="Modern house exterior" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Ishita Properties</b>Luxury property walkthrough</figcaption></figure>
-      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1_c1A8Y2Jzc7S_RJ2naBnYowgrC1hEliw/view" aria-label="Play How to deposit, an app tutorial"><img src="work/reel-deposit.webp" alt="How to Deposit title card" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>How to deposit, an app tutorial</figcaption></figure>
-      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1HOPWI_gSCjtMvyfixywJTfcRDdLGIwGd/view" aria-label="Play The wait is over, a launch teaser"><img src="work/reel-waitover.webp" alt="Black and white clock" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>The wait is over, a launch teaser</figcaption></figure>
-      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1PcS8i7uzYI55xMREv_R9KcBX3ucizTEO/view" data-shape="wide" aria-label="Play Referral ad"><img src="work/reel-referral.webp" alt="Laughing man in glasses" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>Referral ad</figcaption></figure>
-      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1rXSiRHK-y3Bu3Lob_r_oy5nFiwQPh2Pp/view" aria-label="Play Coming soon, a launch teaser"><img src="work/reel-comingsoon.webp" alt="A lone chair under a spotlight" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>Coming soon, a launch teaser</figcaption></figure>
-      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1_DGyGH9EygAvcSZfzBPKLmrKnwjvzv_c/view" data-shape="wide" aria-label="Play Physical club, a venue promo"><img src="work/reel-club.webp" alt="Chips on a gaming table" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>Physical club, a venue promo</figcaption></figure>
+      <figure class="reel reveal"><a href="https://drive.google.com/file/d/19j5Sj7DjZhwAbU5fs7UIeiFVI0keuj4w/view" aria-label="Play Sweet Bonanza, a game promo"><img src="work/reel-sweetbonanza.webp" alt="Candy landscape from Sweet Bonanza" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>Sweet Bonanza, a game promo</figcaption></figure>
+      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1r1hHZGgNBa33jNp_zYAhEiG-WDOS_L22/view" aria-label="Play Aviator, a game promo"><img src="work/reel-aviator.webp" alt="Aviator game screen with a 1.10x multiplier" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>Aviator, a game promo</figcaption></figure>
+      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1Re4yGDKqvAgSqICDWKguQnFIbBu9FbU1/view" aria-label="Play 40 Shining Crown, a game promo"><img src="work/reel-shiningcrown.webp" alt="40 Shining Crown slot reels" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>40 Shining Crown, a game promo</figcaption></figure>
+      <figure class="reel reveal"><a href="work/video/stackd-promo.mp4" data-shape="wide" aria-label="Play STACKD launch film"><img src="work/reel-stackd.webp" alt="STACKD app on a phone" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>STACKD</b>Product launch film</figcaption></figure>
+      <figure class="reel reveal"><a href="work/video/zawli-promo.mp4" data-shape="wide" aria-label="Play Zawli launch film"><img src="work/reel-zawli.webp" alt="Zawli guest menu on a phone" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Zawli</b>Product launch film</figcaption></figure>
     </div>
   </section>
 
@@ -776,7 +776,7 @@
 
 <dialog class="player" id="player" aria-label="Video player">
   <button class="player-close" type="button" aria-label="Close video">&times;</button>
-  <div class="player-frame"><iframe title="Video" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+  <div class="player-frame"><iframe title="Video" allow="autoplay; fullscreen" allowfullscreen></iframe><video controls playsinline preload="none" hidden></video></div>
   <p class="player-caption"></p>
 </dialog>
 
@@ -877,20 +877,30 @@
   (function () {
     var player = document.getElementById("player");
     if (!player || typeof player.showModal !== "function") return;
-    var frame = player.querySelector("iframe"), caption = player.querySelector(".player-caption");
+    var frame = player.querySelector("iframe"), video = player.querySelector("video"), caption = player.querySelector(".player-caption");
     var close = function () { player.close(); };
     document.querySelectorAll(".reel a").forEach(function (link) {
       link.addEventListener("click", function (e) {
-        var id = (link.getAttribute("href").match(/\/d\/([^/]+)/) || [])[1];
-        if (!id) return;
+        var href = link.getAttribute("href");
+        var id = (href.match(/\/d\/([^/]+)/) || [])[1];
+        var own = /\.mp4$/i.test(href);
+        if (!id && !own) return;
         e.preventDefault();
         var fig = link.closest(".reel").querySelector("figcaption");
         player.className = "player " + (link.dataset.shape === "wide" ? "wide" : "tall");
         caption.innerHTML = fig ? fig.innerHTML : "";
-        frame.title = link.getAttribute("aria-label") || "Video";
-        frame.src = "https://drive.google.com/file/d/" + id + "/preview";
+        frame.hidden = own;
+        video.hidden = !own;
+        if (own) {
+          video.src = href;
+          video.setAttribute("aria-label", link.getAttribute("aria-label") || "Video");
+        } else {
+          frame.title = link.getAttribute("aria-label") || "Video";
+          frame.src = "https://drive.google.com/file/d/" + id + "/preview";
+        }
         document.documentElement.style.overflow = "hidden";
         player.showModal();
+        if (own) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
       });
     });
     player.querySelector(".player-close").addEventListener("click", close);
@@ -898,6 +908,9 @@
     player.addEventListener("click", function (e) { if (e.target === player) close(); });
     player.addEventListener("close", function () {
       frame.src = "about:blank";
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
       document.documentElement.style.overflow = "";
     });
   })();
