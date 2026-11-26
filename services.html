@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Services and rates | Joshua Magembe</title>
-<meta name="description" content="Monthly design, video and marketing support from Joshua Magembe in Kampala: up to 8 hours a day, Monday to Friday, for one fixed monthly fee.">
+<meta name="description" content="Design, video, website and marketing support from Joshua Magembe: monthly support or one-off projects, quoted for your business.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314281F'/%3E%3Crect x='7' y='17' width='18' height='7' fill='%23E8A317'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='800' font-size='17' text-anchor='middle' fill='%23F3F5EF'%3EJM%3C/text%3E%3C/svg%3E">
 <link rel="preload" href="fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add("js")</script>
@@ -139,6 +139,29 @@
   .plan.wide .all-label { margin: 0 0 0.9rem; color: var(--leaf); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
 
   /* 3. How it works */
+  /* Service tiles: one per service, each opens its detail card. */
+  .tiles { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(0.75rem, 1.6vw, 1.1rem); }
+  .tile { display: flex; flex-direction: column; gap: 0.45rem; height: 100%; min-height: 10.5rem; padding: clamp(1.1rem, 2.2vw, 1.5rem); border-radius: var(--r-media); background: var(--panel); text-decoration: none; transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out), background-color 220ms ease-out; }
+  .tile:hover, .tile:focus-visible { transform: translateY(-3px); box-shadow: 0 0.9rem 1.8rem rgb(20 40 31 / 0.12); }
+  .tile .tag { color: var(--leaf); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .tile .t3 { font-size: clamp(1.15rem, 1.7vw, 1.35rem); }
+  .tile p { margin: 0; color: var(--ink-soft); font-size: 0.95rem; line-height: 1.45; }
+  .tile .more { margin-top: auto; padding-top: 0.6rem; color: var(--leaf); font-weight: 700; font-size: 0.9rem; }
+  .tile .more::after { content: " \2192"; }
+  .tile.feature { background: var(--night); color: var(--night-text); }
+  .tile.feature .tag, .tile.feature .more { color: var(--mango); }
+  .tile.feature p { color: rgb(243 245 239 / 0.8); }
+  .packs-mini { margin: 1.25rem 0 0 !important; padding: 0; list-style: none; display: grid !important; gap: 0 !important; }
+  .packs-mini li { padding: 0 !important; }
+  .packs-mini li::before { content: none !important; }
+  .packs-mini a { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: 0.75rem 0; border-top: 1px solid rgb(243 245 239 / 0.18); text-decoration: none; }
+  .packs-mini li:last-child a { border-bottom: 1px solid rgb(243 245 239 / 0.18); }
+  .packs-mini span { font-weight: 600; }
+  .packs-mini span::after { content: " \2192"; color: var(--mango); }
+  .packs-mini a:hover span { text-decoration: underline; text-underline-offset: 3px; }
+  .packs-mini b { font-weight: 800; font-stretch: 78%; font-size: 1.5rem; letter-spacing: -0.02em; white-space: nowrap; }
+  .packs-mini b small { margin-left: 0.1em; font-size: 0.55em; font-weight: 600; font-stretch: 100%; letter-spacing: 0; color: rgb(243 245 239 / 0.7); }
+  .packs-mini b.q { font-size: 0.95rem; font-stretch: 100%; letter-spacing: 0; color: var(--mango); }
   .steps { margin: 0; padding: 0; list-style: none; counter-reset: step; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 4vw, 3.5rem); }
   .steps li { counter-increment: step; padding-top: 1.25rem; border-top: 2px solid var(--ink); }
   .steps li::before { content: counter(step, decimal-leading-zero); display: block; margin-bottom: 0.6rem; color: var(--leaf); font-weight: 700; }
@@ -236,10 +259,17 @@
     .portrait { display: none; }
     .contact { grid-template-columns: 1fr; }
     .steps { grid-template-columns: 1fr; gap: 1.75rem; }
+    .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
   @media (max-width: 680px) {
     .masthead nav a.hide-sm { display: none; }
     .sec-head, .plans { grid-template-columns: 1fr; }
+    .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }
+    .tile { min-height: 0; padding: 0.9rem 0.85rem; gap: 0.35rem; }
+    .tile .tag { font-size: 0.7rem; }
+    .tile .t3 { font-size: 1.02rem; }
+    .tile p { font-size: 0.85rem; }
+    .tile .more { font-size: 0.82rem; padding-top: 0.4rem; }
     .fields { grid-template-columns: 1fr; }
     .hero .terms span { display: block; }
     .hero .terms span + span::before { content: none; }
@@ -252,7 +282,7 @@
     html { scroll-behavior: auto; }
     .js .hero-copy > *, .js .portrait .frame::before, .js .portrait img, .detail[open], .detail[open]::backdrop { animation: none; }
     .js .reveal { opacity: 1; transform: none; transition: none; }
-    .btn, .btn::after, .ghost, .reach a, .portrait img, .tasks a, .tasks .more::after { transition: none; }
+    .btn, .btn::after, .ghost, .reach a, .portrait img, .tasks a, .tasks .more::after, .tile { transition: none; }
     .btn:hover, .reach a:hover { transform: none; }
   }
 </style>
@@ -268,8 +298,8 @@
   <a class="name" href="index.html">Joshua Magembe</a>
   <nav aria-label="Main">
     <a href="index.html">Portfolio</a>
-    <a class="hide-sm" href="#plans">Plans</a>
-    <a class="hide-sm" href="#tasks">One-off tasks</a>
+    <a class="hide-sm" href="#services">Services</a>
+    <a class="hide-sm" href="#ways">How we work</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
@@ -279,125 +309,87 @@
   <!-- 1. Hero -->
   <section class="panel night hero" aria-labelledby="h-hero">
     <div class="hero-copy">
-      <p class="eyebrow">Joshua Magembe · Monthly design and marketing support</p>
+      <p class="eyebrow">Joshua Magembe · Design, video and marketing support</p>
       <h1 class="t1" id="h-hero">A designer and marketer on your team, every weekday</h1>
-      <p class="lede">I dedicate <b>up to 8 hours a day, Monday to Friday,</b> to your business, for one fixed monthly fee. That works out at about $2 an hour.</p>
+      <p class="lede">I can dedicate <b>up to 8 hours a day, Monday to Friday,</b> to your business as monthly support, or take on a single project. Tell me what you need and I'll send you a quote.</p>
       <p class="actions">
-        <a class="btn" href="#plans">See the monthly plans</a>
+        <a class="btn" href="#services">See what I can do</a>
         <a class="ghost" href="#quote">Request a quote</a>
       </p>
-      <p class="terms"><span>Plans from $300 a month</span><span>Scope agreed up front</span><span>One-off tasks too</span></p>
+      <p class="terms"><span>Monthly support or one-off projects</span><span>Scope agreed up front</span><span>Quoted by email</span></p>
     </div>
     <figure class="portrait">
       <div class="frame"><img src="img/joshua-cutout.webp" alt="Joshua Magembe" width="640" height="1130" fetchpriority="high"></div>
     </figure>
   </section>
 
-  <!-- 2. Monthly plans: the main offer. Prices are also in DETAILS at the bottom of this file. -->
-  <section class="sec reveal" id="plans" aria-labelledby="h-plans">
+  <!-- 2. Services: one tile per service. The words in each card are in DETAILS at the bottom of this file. -->
+  <section class="sec reveal" id="services" aria-labelledby="h-services">
     <div class="sec-head">
-      <h2 class="t2" id="h-plans">Monthly plans</h2>
-      <p>Every service I offer can run as a monthly plan: one fixed fee for <b>up to 8 hours a day, Monday to Friday.</b> Start with one of these, or build your own. We agree the scope and priorities at the start; it isn't unlimited work, but the mix of tasks can shift as the month goes on.</p>
+      <h2 class="t2" id="h-services">What I can do for you</h2>
+      <p>Tap a service to see what's included and how it saves you time. Every job is quoted for your business, so tell me what you need and I'll send a price by email.</p>
+    </div>
+    <ul class="tiles">
+      <li><a class="tile" href="#graphic-design" data-detail="graphic-design"><span class="tag">Design</span><h3 class="t3">Graphic design</h3><p>Social posts, flyers, posters and brand graphics that look like they belong together.</p><span class="more">What you get</span></a></li>
+      <li><a class="tile" href="#social-media" data-detail="social-media"><span class="tag">Social</span><h3 class="t3">Social media management</h3><p>Planning, captions, scheduling, publishing and keeping an eye on your pages.</p><span class="more">What you get</span></a></li>
+      <li><a class="tile" href="#reels" data-detail="reels"><span class="tag">Video</span><h3 class="t3">Reels and short-form video</h3><p>Your footage cut into short vertical videos for Reels, TikTok and Shorts.</p><span class="more">What you get</span></a></li>
+      <li><a class="tile" href="#video-editing" data-detail="video-editing"><span class="tag">Video</span><h3 class="t3">Video editing</h3><p>Longer videos finished properly: YouTube videos, adverts and event films.</p><span class="more">What you get</span></a></li>
+      <li><a class="tile" href="#website-design" data-detail="website-design"><span class="tag">Web</span><h3 class="t3">Website design</h3><p>Websites designed and built for your business, and kept up to date.</p><span class="more">What you get</span></a></li>
+      <li><a class="tile" href="#seo-audit" data-detail="seo-audit"><span class="tag">Web</span><h3 class="t3">SEO audits</h3><p>A written review of what holds your site back in search, with fixes in order.</p><span class="more">What you get</span></a></li>
+      <li><a class="tile" href="#email-marketing" data-detail="email-marketing"><span class="tag">Marketing</span><h3 class="t3">Email marketing</h3><p>Newsletters and campaign emails, designed, written and scheduled.</p><span class="more">What you get</span></a></li>
+      <li><a class="tile" href="#lead-generation" data-detail="lead-generation"><span class="tag">Marketing</span><h3 class="t3">Lead generation</h3><p>Finding and researching the businesses most likely to buy from you.</p><span class="more">What you get</span></a></li>
+      <li><a class="tile" href="#research" data-detail="research"><span class="tag">Marketing</span><h3 class="t3">Competitor and market research</h3><p>What your competitors do, what your market wants, and what to do next.</p><span class="more">What you get</span></a></li>
+      <li><a class="tile" href="#virtual-assistance" data-detail="virtual-assistance"><span class="tag">Support</span><h3 class="t3">Virtual assistance</h3><p>Inbox, admin and the everyday tasks that eat into your week.</p><span class="more">What you get</span></a></li>
+      <li><a class="tile" href="#content-creation" data-detail="content-creation"><span class="tag">Content</span><h3 class="t3">Content creation</h3><p>Posts, captions, blog content and visuals planned around your goals.</p><span class="more">What you get</span></a></li>
+      <li><a class="tile feature" href="#monthly-support" data-detail="monthly-support"><span class="tag">Monthly</span><h3 class="t3">Monthly support</h3><p>Any mix of these, up to 8 hours a day, Monday to Friday.</p><span class="more">How it works</span></a></li>
+    </ul>
+  </section>
+
+  <!-- 3. Two ways to work together -->
+  <section class="sec reveal ways" id="ways" aria-labelledby="h-ways">
+    <div class="sec-head">
+      <h2 class="t2" id="h-ways">How we can work</h2>
+      <p>Choose ongoing support or a single project. Either way, we agree the scope first and you get a quote before any work starts.</p>
     </div>
     <div class="plans">
       <article class="plan dark">
-        <p class="kind">Monthly plan</p>
-        <h3 class="t3">Social Media Support</h3>
-        <p class="price">$325<small>/month</small></p>
+        <p class="kind">Ongoing</p>
+        <h3 class="t3">Monthly support</h3>
         <p class="hours">Up to 8 hours a day, Monday to Friday</p>
-        <p class="sum">Your social media handled for the month: planned, designed, edited, written, posted and reviewed.</p>
-        <ul>
-          <li>Up to two platforms</li>
-          <li>Roughly 20 to 30 content pieces a month</li>
-          <li>Design, reels, captions and scheduling</li>
-          <li>A monthly performance review</li>
+        <p class="sum">A designer and marketer working on your business every weekday. We agree the month's priorities at the start; it isn't unlimited work, but the mix of tasks can shift as the month goes on.</p>
+        <ul class="packs-mini" aria-label="Monthly packages">
+          <li><a href="#social-media-support" data-detail="social-media-support"><span>Social Media Support</span><b>$325<small>/month</small></b></a></li>
+          <li><a href="#remote-marketing-assistant" data-detail="remote-marketing-assistant"><span>Remote Marketing Assistant</span><b>$300<small>/month</small></b></a></li>
+          <li><a href="#monthly-support" data-detail="monthly-support"><span>Your own mix</span><b class="q">Quoted for you</b></a></li>
         </ul>
         <p class="actions">
-          <a class="btn" href="#social-media-support" data-detail="social-media-support">What you get</a>
-          <a class="ghost" href="#quote" data-pick="Social Media Support plan">Start with this plan</a>
+          <a class="btn" href="#quote" data-pick="Monthly support" data-way="Monthly support">Ask about monthly support</a>
         </p>
       </article>
       <article class="plan">
-        <p class="kind">Monthly plan</p>
-        <h3 class="t3">Remote Marketing Assistant</h3>
-        <p class="price">$300<small>/month</small></p>
-        <p class="hours">Up to 8 hours a day, Monday to Friday</p>
-        <p class="sum">An extra pair of hands for marketing and admin: research, outreach, email and updates.</p>
-        <ul>
-          <li>Lead generation and prospect research</li>
-          <li>Email marketing assistance</li>
-          <li>Competitor and market research</li>
-          <li>Weekly progress updates</li>
-        </ul>
+        <p class="kind">Single job</p>
+        <h3 class="t3">One-off project</h3>
+        <p class="hours">Quoted once I know the deliverables</p>
+        <p class="sum">A defined piece of work with a clear finish, such as a website, a set of designs, an edit or an audit. Send me the details and I'll reply with a quote and a timeline.</p>
         <p class="actions">
-          <a class="btn" href="#remote-marketing-assistant" data-detail="remote-marketing-assistant">What you get</a>
-          <a class="ghost" href="#quote" data-pick="Remote Marketing Assistant plan">Start with this plan</a>
+          <a class="btn" href="#quote" data-pick="Not sure yet" data-way="One-off project">Ask about a project</a>
+          <a class="ghost" data-contact="whatsapp" href="#contact">WhatsApp me</a>
         </p>
-      </article>
-      <article class="plan wide">
-        <div>
-          <p class="kind">Monthly plan</p>
-          <h3 class="t3">Build your own plan</h3>
-          <p class="hours">Up to 8 hours a day, Monday to Friday</p>
-          <p class="sum">Need a different mix? Any of my services can run as a monthly plan. Tell me what you need and I'll send a fixed monthly price before we start.</p>
-          <p class="actions">
-            <a class="btn" href="#custom-plan" data-detail="custom-plan">What you get</a>
-            <a class="ghost" href="#quote" data-pick="Custom monthly plan">Ask for a monthly price</a>
-          </p>
-        </div>
-        <div>
-          <p class="all-label">Choose from</p>
-          <ul class="all">
-            <li>Graphic design</li>
-            <li>Social media management</li>
-            <li>Reels and short-form video</li>
-            <li>Video editing</li>
-            <li>Website design and updates</li>
-            <li>SEO audits</li>
-            <li>Email marketing</li>
-            <li>Lead generation</li>
-            <li>Competitor and market research</li>
-            <li>Virtual assistance</li>
-            <li>Content creation</li>
-          </ul>
-        </div>
       </article>
     </div>
   </section>
 
-  <!-- 3. How it works -->
+  <!-- 4. How it works -->
   <section class="sec reveal" id="how" aria-labelledby="h-how">
     <div class="sec-head">
       <h2 class="t2" id="h-how">How it works</h2>
       <p>I'm based in Kampala, on East Africa Time (UTC+3), and work Monday to Friday.</p>
     </div>
     <ol class="steps">
-      <li><h3 class="t3">Tell me about your business</h3><p>Send a quote request, an email or a WhatsApp message with what you need.</p></li>
-      <li><h3 class="t3">We agree the month</h3><p>We set the scope and priorities together, so you know what the fee covers before work starts.</p></li>
-      <li><h3 class="t3">I get to work</h3><p>Up to 8 hours a day on your business, with the updates that come with your plan.</p></li>
+      <li><h3 class="t3">Tell me what you need</h3><p>Send a quote request, an email or a WhatsApp message with the details.</p></li>
+      <li><h3 class="t3">Get your quote</h3><p>We agree the scope and I send you a price by email, so you know exactly what it covers.</p></li>
+      <li><h3 class="t3">I get to work</h3><p>You get regular updates and the finished work on the dates we agreed.</p></li>
     </ol>
-  </section>
-
-  <!-- 4. One-off tasks: second to the plans. Each row opens its detail card. -->
-  <section class="sec reveal" id="tasks" aria-labelledby="h-tasks">
-    <div class="sec-head">
-      <h2 class="t2" id="h-tasks">One-off tasks</h2>
-      <p>Need a single piece of work instead? Every project is different, so I price one-off tasks once I know the deliverables. Tap a task to see what's included.</p>
-    </div>
-    <ul class="tasks">
-      <li><a href="#graphic-design" data-detail="graphic-design"><h3 class="t3">Graphic design</h3><p class="sub">Posts, flyers, posters and brand graphics</p><span class="more">Details</span></a></li>
-      <li><a href="#social-media-task" data-detail="social-media-task"><h3 class="t3">Social media support</h3><p class="sub">Planning, captions, scheduling and page monitoring</p><span class="more">Details</span></a></li>
-      <li><a href="#reels" data-detail="reels"><h3 class="t3">Reels and short-form video</h3><p class="sub">Short vertical videos, cut and captioned</p><span class="more">Details</span></a></li>
-      <li><a href="#video-editing" data-detail="video-editing"><h3 class="t3">Video editing</h3><p class="sub">Longer videos, such as YouTube videos, adverts and event films</p><span class="more">Details</span></a></li>
-      <li><a href="#seo-audit" data-detail="seo-audit"><h3 class="t3">SEO audit</h3><p class="sub">A written review with fixes in order of priority</p><span class="more">Details</span></a></li>
-      <li><a href="#website-design" data-detail="website-design"><h3 class="t3">Website design</h3><p class="sub">Designed and built for your business</p><span class="more">Details</span></a></li>
-      <li><a href="#additional-services" data-detail="additional-services"><h3 class="t3">Additional services</h3><p class="sub">Email, leads, research, admin and content</p><span class="more">Details</span></a></li>
-    </ul>
-    <div class="tasks-cta">
-      <p>Send me the deliverables and I'll reply with a price.</p>
-      <a class="btn" data-contact="whatsapp" href="#contact">WhatsApp me</a>
-      <a class="ghost" data-contact="email" href="mailto:joshua.m7733@gmail.com">Email me</a>
-    </div>
   </section>
 
   <!-- 5. Proof of work: hand over to the portfolio instead of repeating it -->
@@ -435,7 +427,7 @@
 
     <form class="quote" id="quote" novalidate>
       <h3 class="t3" id="h-quote">Request a quote</h3>
-      <p>Share a few details and I'll reply with a price and a start date.</p>
+      <p>Share a few details and I'll reply with a quote and a start date.</p>
       <div class="fields">
         <div class="field"><label for="q-name">Your name</label><input id="q-name" name="name" type="text" autocomplete="name" required></div>
         <div class="field"><label for="q-email">Email address</label><input id="q-email" name="email" type="email" autocomplete="email" required></div>
@@ -443,38 +435,34 @@
         <div class="field"><label for="q-service">Service required</label>
           <select id="q-service" name="service" required>
             <option value="">Choose one</option>
-            <optgroup label="Monthly plans">
-              <option>Social Media Support plan</option>
-              <option>Remote Marketing Assistant plan</option>
-              <option>Custom monthly plan</option>
-            </optgroup>
-            <optgroup label="One-off tasks">
+            <optgroup label="Services">
               <option>Graphic design</option>
-              <option>Social media support</option>
+              <option>Social media management</option>
               <option>Reels and short-form video</option>
               <option>Video editing</option>
-              <option>SEO audit</option>
               <option>Website design</option>
-              <option>Additional services</option>
+              <option>SEO audits</option>
+              <option>Email marketing</option>
+              <option>Lead generation</option>
+              <option>Competitor and market research</option>
+              <option>Virtual assistance</option>
+              <option>Content creation</option>
+            </optgroup>
+            <optgroup label="Monthly">
+              <option>Social Media Support package</option>
+              <option>Remote Marketing Assistant package</option>
+              <option>Monthly support</option>
             </optgroup>
             <option>Not sure yet</option>
           </select></div>
         <div class="field"><label for="q-engagement">Preferred way of working</label>
           <select id="q-engagement" name="engagement" required>
             <option value="">Choose one</option>
-            <option>Monthly plan</option>
-            <option>One-off task</option>
-            <option>Fixed-price project</option>
+            <option>Monthly support</option>
+            <option>One-off project</option>
             <option>Not sure yet</option>
           </select></div>
-        <div class="field wide"><label for="q-budget">Budget <span>(optional)</span></label>
-          <select id="q-budget" name="budget">
-            <option value="">Not sure yet</option>
-            <option>Under $50</option>
-            <option>$50 to $150</option>
-            <option>$150 to $350</option>
-            <option>Over $350</option>
-          </select></div>
+        <div class="field wide"><label for="q-budget">Budget <span>(optional)</span></label><input id="q-budget" name="budget" type="text" placeholder="If you have one in mind"></div>
         <div class="trap" aria-hidden="true"><label for="q-website">Website</label><input id="q-website" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
         <div class="field wide"><label for="q-details">Project description</label><textarea id="q-details" name="details" required placeholder="What do you need done, and by when?"></textarea></div>
       </div>
@@ -532,11 +520,36 @@
   // "pick" is the option chosen in the quote form when they tap "Ask about this".
   // ---------------------------------------------------------------------------
   var DETAILS = {
+    "monthly-support": {
+      "kind": "Monthly support",
+      "title": "Your own mix",
+      "priceText": "Quoted monthly for your mix",
+      "pick": "Monthly support",
+      "way": "Monthly support",
+      "sum": "Any mix of my services, every weekday, as one monthly arrangement.",
+      "get": [
+        "Up to 8 hours a day, Monday to Friday, on your work",
+        "Any mix of design, social media, video, websites, email marketing, research, admin and content",
+        "Scope and priorities agreed at the start of each month",
+        "Regular updates on what's done and what's next"
+      ],
+      "help": [
+        "One person covers several roles, so you don't have to hire and manage a freelancer for each.",
+        "A fixed monthly arrangement keeps your costs predictable.",
+        "Because we agree the scope each month, the mix can change as your needs do."
+      ],
+      "good": "Businesses and agencies that need steady help across several kinds of work.",
+      "note": "Tell me what you need and I'll come back with a monthly quote."
+    },
     "social-media-support": {
-      kind: "Monthly plan", title: "Social Media Support", price: "$325", unit: "/month",
-      pick: "Social Media Support plan", way: "Monthly plan",
-      sum: "Your social media handled for the month: planned, designed, edited, written, posted and reviewed.",
-      get: [
+      "kind": "Monthly support",
+      "title": "Social media support",
+      "price": "$325",
+      "unit": "/month",
+      "pick": "Social Media Support package",
+      "way": "Monthly support",
+      "sum": "Your social media handled for the month: planned, designed, edited, written, posted and reviewed.",
+      "get": [
         "Up to 8 hours a day, Monday to Friday, on your pages",
         "Support for up to two social media platforms",
         "Content planning and calendar management",
@@ -547,19 +560,23 @@
         "Basic community engagement and page monitoring",
         "A monthly performance review"
       ],
-      help: [
-        "One monthly fee covers design, video, captions and posting, so you don't have to find and brief a different freelancer for each.",
+      "help": [
+        "Design, video, captions and posting from one person, so you don't have to brief a different freelancer for each.",
         "Your pages keep posting on a plan, without you having to find the time.",
         "The monthly review shows what worked, so each month's content builds on the last."
       ],
-      good: "Businesses and agencies that need steady, on-brand content on one or two platforms.",
-      note: "The aim is roughly 20 to 30 content pieces a month, depending on how complex they are and the materials you can share."
+      "good": "Businesses and agencies that need steady, on-brand content on one or two platforms.",
+      "note": "The aim is roughly 20 to 30 content pieces a month, depending on how complex they are and the materials you can share."
     },
     "remote-marketing-assistant": {
-      kind: "Monthly plan", title: "Remote Marketing Assistant", price: "$300", unit: "/month",
-      pick: "Remote Marketing Assistant plan", way: "Monthly plan",
-      sum: "An extra pair of hands for marketing and admin: research, outreach, email and updates.",
-      get: [
+      "kind": "Monthly support",
+      "title": "Remote marketing assistant",
+      "price": "$300",
+      "unit": "/month",
+      "pick": "Remote Marketing Assistant package",
+      "way": "Monthly support",
+      "sum": "An extra pair of hands for marketing and admin: research, outreach, email and updates.",
+      "get": [
         "Up to 8 hours a day, Monday to Friday, on your tasks",
         "Lead generation and prospect research",
         "Email marketing assistance",
@@ -569,142 +586,219 @@
         "Social media administration",
         "Weekly progress updates"
       ],
-      help: [
+      "help": [
         "Hand off the research and admin that fills your day, and spend that time on clients and sales.",
-        "A fixed price each month, so you know the cost before the month starts.",
+        "One arrangement covers many small tasks, so nothing waits for someone to be free.",
         "Weekly updates show what has been done, so nothing needs chasing."
       ],
-      good: "Founders, small teams and agencies who need reliable help across many small marketing tasks.",
-      note: "We agree the month's priorities at the start. It isn't unlimited work, but the mix of tasks can shift as the month goes on."
-    },
-    "custom-plan": {
-      kind: "Monthly plan", title: "Build your own plan", priceText: "A fixed monthly price for your mix",
-      pick: "Custom monthly plan", way: "Monthly plan",
-      sum: "Any mix of my services, as one monthly plan.",
-      get: [
-        "Up to 8 hours a day, Monday to Friday, on your work",
-        "Any mix of graphic design, social media, reels and video editing, website design and updates, SEO audits, email marketing, lead generation, research, virtual assistance and content creation",
-        "Scope and priorities agreed at the start of each month",
-        "One fixed monthly price, agreed before work starts"
-      ],
-      help: [
-        "One person covers several roles, so you don't have to hire and manage a freelancer for each.",
-        "A fixed monthly price keeps your costs predictable.",
-        "Because we agree the scope each month, the mix can change as your needs do."
-      ],
-      good: "Businesses and agencies whose needs don't fit neatly into one of the plans above.",
-      note: "Tell me what you need and I'll come back with a monthly price."
+      "good": "Founders, small teams and agencies who need reliable help across many small marketing tasks."
     },
     "graphic-design": {
-      kind: "One-off task", title: "Graphic design", priceText: "Priced per project",
-      pick: "Graphic design", way: "One-off task",
-      sum: "Designs for social media, print and your brand.",
-      get: [
+      "kind": "Service",
+      "title": "Graphic design",
+      "sum": "Designs for social media, print and your brand.",
+      "get": [
         "Social media posts and carousels",
         "Flyers, posters and banners",
         "Brand graphics in your colours and fonts",
-        "Files sized for where they'll be used"
+        "Files sized and exported for where they'll be used"
       ],
-      help: [
-        "You get a price for the job before any work starts.",
-        "Everything follows your brand, so your posts and print look like they belong together."
+      "help": [
+        "Everything follows your brand, so your posts and print look like they belong together.",
+        "You get finished files, ready to post or print, without back-and-forth over formats."
       ],
-      good: "One-off designs, or extra design work when your team is stretched."
+      "good": "One-off designs, regular content, or extra design hands when your team is stretched.",
+      "priceText": "Quoted for your project",
+      "pick": "Graphic design",
+      "way": "Not sure yet"
     },
-    "social-media-task": {
-      kind: "One-off task", title: "Social media support", priceText: "Priced per project",
-      pick: "Social media support", way: "One-off task",
-      sum: "Help with your pages when you need it, without a monthly plan.",
-      get: [
-        "Content planning",
+    "social-media": {
+      "kind": "Service",
+      "title": "Social media management",
+      "sum": "Your pages planned, posted and looked after.",
+      "get": [
+        "Content planning and a posting calendar",
         "Captions and short copy",
-        "Scheduling posts",
-        "Page monitoring"
+        "Scheduling and publishing",
+        "Page monitoring and basic replies"
       ],
-      help: [
-        "Help when you need it, with no monthly commitment.",
-        "A quick way to catch up on a backlog or cover a busy week."
+      "help": [
+        "Your pages keep posting consistently, even in your busiest weeks.",
+        "You spend your time on the business while your audience keeps hearing from you."
       ],
-      good: "Businesses that post themselves but need help at busy times. For ongoing help, the Social Media Support plan covers more for one fee."
+      "good": "Businesses that know social media matters but don't have the time to run it.",
+      "priceText": "Quoted for your project",
+      "pick": "Social media management",
+      "way": "Not sure yet"
     },
     "reels": {
-      kind: "One-off task", title: "Reels and short-form video", priceText: "Priced per project",
-      pick: "Reels and short-form video", way: "One-off task",
-      sum: "Your footage turned into short vertical videos for social media.",
-      get: [
-        "Your clips cut into a short vertical video",
+      "kind": "Service",
+      "title": "Reels and short-form video",
+      "sum": "Your footage turned into short vertical videos for social media.",
+      "get": [
+        "Your clips cut into short vertical videos",
         "Captions and text on screen",
-        "Sized for Instagram Reels, TikTok and YouTube Shorts"
+        "Sized for Instagram Reels, TikTok and YouTube Shorts",
+        "Cover images for each video"
       ],
-      help: [
-        "You know the price before any editing starts.",
-        "Footage you already have becomes posts you can use."
+      "help": [
+        "Footage you already have becomes posts you can use.",
+        "Short video is what the platforms push most, so your content reaches more people."
       ],
-      good: "Businesses and creators with footage that needs turning into regular posts."
+      "good": "Businesses and creators with footage that needs turning into regular posts.",
+      "priceText": "Quoted for your project",
+      "pick": "Reels and short-form video",
+      "way": "Not sure yet"
     },
     "video-editing": {
-      kind: "One-off task", title: "Video editing", priceText: "Priced per project",
-      pick: "Video editing", way: "One-off task",
-      sum: "Editing for longer videos, priced for the project.",
-      get: [
-        "Editing longer videos, such as YouTube videos, adverts or event films",
-        "Captions, titles and simple motion graphics"
+      "kind": "Service",
+      "title": "Video editing",
+      "sum": "Longer videos, edited and finished properly.",
+      "get": [
+        "YouTube videos, adverts, event films and promos",
+        "Captions, titles and simple motion graphics",
+        "Music and sound tidied up",
+        "Versions for each platform you post on"
       ],
-      help: [
-        "A dependable editor for the project, without a full-time hire.",
-        "You send the footage and get finished videos back."
+      "help": [
+        "You send the footage and get finished videos back.",
+        "A dependable editor for the project, without a full-time hire."
       ],
-      good: "Businesses and creators with video that needs finishing. For regular editing, a monthly plan works out better."
+      "good": "Businesses and creators with video that needs finishing, once or regularly.",
+      "priceText": "Quoted for your project",
+      "pick": "Video editing",
+      "way": "Not sure yet"
+    },
+    "website-design": {
+      "kind": "Service",
+      "title": "Website design",
+      "sum": "A website designed and built for your business.",
+      "get": [
+        "Website design and build",
+        "Pages that work on phones, tablets and computers",
+        "Contact forms and WhatsApp links that reach you",
+        "Updates and new pages when you need them"
+      ],
+      "help": [
+        "One person handles both the design and the build, so nothing gets lost in between.",
+        "You get a site customers can use on their phones, where most of them will find you."
+      ],
+      "good": "Business websites, landing pages and portfolio sites. See the portfolio for sites I've made.",
+      "priceText": "Quoted for your project",
+      "pick": "Website design",
+      "way": "Not sure yet"
     },
     "seo-audit": {
-      kind: "One-off task", title: "SEO audit", priceText: "Priced per project",
-      pick: "SEO audit", way: "One-off task",
-      sum: "A written review of what is holding your website back in search.",
-      get: [
-        "A check of your site's search basics, such as page titles, descriptions, headings, speed and how it works on phones",
+      "kind": "Service",
+      "title": "SEO audits",
+      "sum": "A written review of what is holding your website back in search.",
+      "get": [
+        "A check of your site's search basics: page titles, descriptions, headings, speed and how it works on phones",
         "A written report of what to fix",
         "Fixes listed in order of priority"
       ],
-      help: [
+      "help": [
         "You know what to fix first, before you spend money on adverts or a redesign.",
-        "One price for the whole audit, agreed up front."
+        "Clear priorities, so you or your developer can act on it straight away."
       ],
-      good: "Any business with a website that isn't bringing in visitors from search."
+      "good": "Any business with a website that isn't bringing in visitors from search.",
+      "priceText": "Quoted for your project",
+      "pick": "SEO audits",
+      "way": "Not sure yet"
     },
-    "website-design": {
-      kind: "One-off task", title: "Website design", priceText: "Priced per project",
-      pick: "Website design", way: "Fixed-price project",
-      sum: "A website designed and built for your business, at a fixed price for the project.",
-      get: [
-        "Website design and build",
-        "Pages that work on phones, tablets and computers",
-        "One fixed price for the project, agreed before work starts"
+    "email-marketing": {
+      "kind": "Service",
+      "title": "Email marketing",
+      "sum": "Emails your customers actually open.",
+      "get": [
+        "Newsletter and campaign email design",
+        "Email copy and subject lines",
+        "Reusable templates in your brand",
+        "Scheduling and list tidying"
       ],
-      help: [
-        "With a fixed price, you know the full cost before work begins.",
-        "One person handles both the design and the build, so nothing is lost in between."
+      "help": [
+        "Email reaches people who already know you, without paying for every view.",
+        "Templates make each new campaign faster to send."
       ],
-      good: "Business websites, landing pages and portfolio sites. See the portfolio for websites I've made."
+      "good": "Businesses with a customer list they don't use as much as they could.",
+      "priceText": "Quoted for your project",
+      "pick": "Email marketing",
+      "way": "Not sure yet"
     },
-    "additional-services": {
-      kind: "One-off task", title: "Additional services", priceText: "Priced per project",
-      pick: "Additional services", way: "One-off task",
-      sum: "Help with the everyday marketing and admin tasks that take up your time.",
-      get: [
-        "Email marketing",
-        "Lead generation",
-        "Virtual assistance",
-        "Website and content management",
-        "Competitor research",
-        "Business and market research",
-        "Content creation"
+    "lead-generation": {
+      "kind": "Service",
+      "title": "Lead generation",
+      "sum": "A list of the right businesses to talk to, researched properly.",
+      "get": [
+        "Prospect lists in your target market",
+        "Company details, decision-makers and public contact information",
+        "Notes on why each one could need you",
+        "Everything organised in a spreadsheet you own"
       ],
-      help: [
-        "Priced for the task, so simple work doesn't cost a specialist's fee.",
-        "Hand these off and keep your own hours for the work only you can do."
+      "help": [
+        "Your outreach starts from real research instead of guesswork.",
+        "You spend your time talking to prospects, not looking for them."
       ],
-      good: "Small businesses and agencies with a backlog of smaller tasks. For regular help, the Remote Marketing Assistant plan covers these for one monthly fee.",
-      note: "The price depends on the task. I'll confirm it before any work starts."
+      "good": "Agencies, consultants and B2B businesses that want more of the right clients.",
+      "priceText": "Quoted for your project",
+      "pick": "Lead generation",
+      "way": "Not sure yet"
+    },
+    "research": {
+      "kind": "Service",
+      "title": "Competitor and market research",
+      "sum": "What your competitors do, what your market wants, and what to do next.",
+      "get": [
+        "A look at your main competitors' offers, pricing pages, content and channels",
+        "Market and audience research",
+        "A short written summary with clear takeaways"
+      ],
+      "help": [
+        "Decisions based on what's actually happening in your market.",
+        "You see the gaps you can fill before you spend on marketing."
+      ],
+      "good": "Businesses launching something new, entering a market or planning a campaign.",
+      "priceText": "Quoted for your project",
+      "pick": "Competitor and market research",
+      "way": "Not sure yet"
+    },
+    "virtual-assistance": {
+      "kind": "Service",
+      "title": "Virtual assistance",
+      "sum": "Help with the everyday tasks that take up your week.",
+      "get": [
+        "Inbox and calendar support",
+        "Data entry and document preparation",
+        "Research and follow-ups",
+        "Online admin for your business and social accounts"
+      ],
+      "help": [
+        "Hand these off and keep your own hours for the work only you can do.",
+        "Small tasks get done on time instead of piling up."
+      ],
+      "good": "Founders and small teams with more admin than time.",
+      "priceText": "Quoted for your project",
+      "pick": "Virtual assistance",
+      "way": "Not sure yet"
+    },
+    "content-creation": {
+      "kind": "Service",
+      "title": "Content creation",
+      "sum": "Content planned around your goals, written and designed to match your brand.",
+      "get": [
+        "Social posts and carousels",
+        "Captions, scripts and blog content",
+        "Visuals and short videos",
+        "A simple plan for what to post and when"
+      ],
+      "help": [
+        "A steady flow of content without you having to come up with it.",
+        "Every piece points back to what you're trying to achieve."
+      ],
+      "good": "Businesses that want to show up online regularly but don't know what to post.",
+      "priceText": "Quoted for your project",
+      "pick": "Content creation",
+      "way": "Not sure yet"
     }
   };
 
@@ -732,10 +826,10 @@
   var service = document.getElementById("q-service"), engagement = document.getElementById("q-engagement");
   function pick(serviceName, way) {
     service.value = serviceName;
-    engagement.value = way || (/plan$/.test(serviceName) ? "Monthly plan" : "One-off task");
+    engagement.value = way || (serviceName === "Monthly support" ? "Monthly support" : "Not sure yet");
   }
   document.querySelectorAll("[data-pick]").forEach(function (link) {
-    link.addEventListener("click", function () { pick(link.dataset.pick); });
+    link.addEventListener("click", function () { pick(link.dataset.pick, link.dataset.way); });
   });
 
   // Detail cards open over the page. Each has its own link (services.html#seo-audit) that can be shared.
