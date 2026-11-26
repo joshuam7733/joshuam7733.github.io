@@ -212,6 +212,9 @@
   /* Design sheets */
   .art-grid { display: grid; gap: clamp(0.75rem, 2vw, 1.25rem); align-items: start; }
   .art-grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .art-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .art-label { margin: clamp(1.25rem, 3vw, 2rem) 0 0.75rem; color: var(--leaf); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+  .art-label:first-of-type { margin-top: 0; }
   .art-grid.meilin { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
   .art { margin: 0; }
   .art.banner { grid-column: 1 / -1; }
@@ -232,25 +235,36 @@
   .reel figcaption { margin-top: 0.6rem; font-size: 0.925rem; color: var(--ink-soft); }
   .reel figcaption b { display: block; color: var(--ink); }
 
-  /* Video player: Google Drive's player in a window over the page, shaped to the video. */
-  .player { padding: 0; border: 0; background: transparent; overflow: visible; max-width: none; max-height: none; }
-  .player::backdrop { background: rgb(10 15 12 / 0.88); backdrop-filter: blur(4px); }
-  .player-frame { position: relative; overflow: hidden; border-radius: var(--r-media); background: #0A0F0C; box-shadow: 0 2rem 5rem rgb(0 0 0 / 0.5); }
-  .player.tall .player-frame { height: min(82vh, 52rem); aspect-ratio: 9 / 16; max-width: 92vw; }
-  .player.wide .player-frame { width: min(92vw, 70rem); aspect-ratio: 16 / 9; max-height: 78vh; }
-  .player-frame::before { content: "Loading video..."; position: absolute; inset: 0; display: grid; place-items: center; color: #A7B8AD; font-size: 0.95rem; }
-  .player iframe, .player video { position: relative; display: block; width: 100%; height: 100%; border: 0; background: #0A0F0C; }
-  .player-caption { margin: 0.75rem 0 0; color: #E9EFE6; font-size: 0.95rem; }
-  .player-caption b { color: var(--mango); }
-  .player-close {
-    position: absolute; top: -0.75rem; right: -0.75rem; z-index: 1;
-    width: 2.75rem; height: 2.75rem; border: 0; border-radius: 50%;
-    background: var(--mango); color: #14281F; font: inherit; font-size: 1.6rem; line-height: 1; cursor: pointer;
-    box-shadow: 0 0.5rem 1.25rem rgb(0 0 0 / 0.35);
-  }
+  /* Video player: our own compressed files in the browser's player. On phones it fills the screen;
+     on larger screens it is a frame shaped to the video. The close button and caption fade out
+     while a video plays and come back on any tap, click, mouse move or key press. */
+  .player { width: 100vw; height: 100vh; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: transparent; overflow: hidden; }
+  .player::backdrop { background: rgb(10 15 12 / 0.92); backdrop-filter: blur(4px); }
+  .player-stage { position: absolute; inset: 0; display: grid; place-items: center; padding: max(1rem, env(safe-area-inset-top, 0px)) max(1rem, env(safe-area-inset-right, 0px)) max(1rem, env(safe-area-inset-bottom, 0px)) max(1rem, env(safe-area-inset-left, 0px)); }
+  .player-frame { position: relative; overflow: hidden; border-radius: var(--r-media); background: #0A0F0C; box-shadow: 0 2rem 5rem rgb(0 0 0 / 0.5); max-width: 100%; max-height: 100%; }
+  .player.tall .player-frame { aspect-ratio: 9 / 16; height: min(88dvh, 54rem); }
+  .player.wide .player-frame { aspect-ratio: 16 / 9; width: min(92vw, 72rem); }
+  .player video { display: block; width: 100%; height: 100%; object-fit: contain; background: #0A0F0C; }
+  .player-loading { position: absolute; inset: 0; display: grid; place-items: center; color: #E9EFE6; font-size: 0.95rem; pointer-events: none; opacity: 0; transition: opacity 200ms ease-out; }
+  .player.loading .player-loading { opacity: 1; }
+  .player-loading span { padding: 0.45rem 0.8rem; border-radius: 999px; background: rgb(10 15 12 / 0.7); }
+  .player-bar { position: absolute; left: 0; right: 0; top: 0; z-index: 2; display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+    padding: max(0.9rem, env(safe-area-inset-top, 0px)) max(1rem, env(safe-area-inset-right, 0px)) 2.5rem max(1rem, env(safe-area-inset-left, 0px));
+    background: linear-gradient(rgb(10 15 12 / 0.75), transparent); transition: opacity 350ms ease-out; pointer-events: none; }
+  .player-bar > * { pointer-events: auto; }
+  .player-caption { margin: 0.35rem 0 0; color: #E9EFE6; font-size: 0.95rem; line-height: 1.35; min-width: 0; }
+  .player-caption b { display: block; color: var(--mango); }
+  .player-close { flex: none; width: 2.75rem; height: 2.75rem; border: 0; border-radius: 50%; background: var(--mango); color: #14281F; font: inherit; font-size: 1.6rem; line-height: 1; cursor: pointer; box-shadow: 0 0.5rem 1.25rem rgb(0 0 0 / 0.35); }
   .player-close:hover { background: #F2B93A; }
   .player-close:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
-  @media (max-width: 680px) { .player-close { top: 0.5rem; right: 0.5rem; } }
+  .player.idle .player-bar { opacity: 0; }
+  .player.idle .player-bar > * { pointer-events: none; }
+  .player.idle { cursor: none; }
+  @media (max-width: 680px) {
+    /* Phones: the video uses the whole screen, edge to edge. */
+    .player-stage { padding: 0; }
+    .player-frame, .player.tall .player-frame, .player.wide .player-frame { width: 100%; height: 100%; aspect-ratio: auto; border-radius: 0; box-shadow: none; }
+  }
 
   .note-panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 1rem clamp(1.5rem, 4vw, 3.5rem); }
   .note-panel h4 { margin: 0; font-size: clamp(1.8rem, 4vw, 3rem); line-height: 0.95; font-weight: 800; font-stretch: 78%; text-transform: uppercase; letter-spacing: -0.02em; }
@@ -306,6 +320,7 @@
     .hello { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
     .hello .side { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
     .art-grid.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .art-grid.three { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
   @media (max-width: 680px) {
     .masthead nav a.hide-sm { display: none; }
@@ -633,18 +648,25 @@
   <section class="panel reveal" id="brand-uplex" aria-label="Uplex and Associates brand">
     <div class="sheet-head">
       <h4>Uplex &amp; Associates</h4>
-      <p>A brand identity for a tax, accounting and advisory firm, carried across LinkedIn, print and social, then a full campaign for its SME masterclass: the sponsorship pack, event poster, problem-led posts and a daily countdown built from one template.</p>
+      <p>A brand identity for a tax, accounting and advisory firm, set out in a brand guide that covers the logo system, type, colour and stationery. Then a campaign for its SME masterclass: problem-led posts, a daily countdown built from one template, positioning posts and the sponsorship pack.</p>
     </div>
-    <div class="art-grid four">
-      <figure class="art banner reveal"><a href="work/uplex-linkedin.webp"><img src="work/uplex-linkedin.webp" alt="Uplex &amp; Associates LinkedIn cover" width="1400" height="350" loading="lazy" decoding="async"></a><figcaption>LinkedIn cover</figcaption></figure>
+    <p class="art-label">From the brand guide</p>
+    <div class="art-grid three">
+      <figure class="art reveal"><a href="work/uplex-guide-cover.webp"><img src="work/uplex-guide-cover.webp" alt="Uplex &amp; Associates brand guide cover" width="1000" height="1000" loading="lazy" decoding="async"></a><figcaption>Brand guide</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-guide-logo-system.webp"><img src="work/uplex-guide-logo-system.webp" alt="Logo icons and horizontal logo versions" width="1000" height="1000" loading="lazy" decoding="async"></a><figcaption>Logo system</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-guide-type-colour.webp"><img src="work/uplex-guide-type-colour.webp" alt="Bebas Neue and Montserrat type, and the yellow, white, black and maroon palette" width="1000" height="1000" loading="lazy" decoding="async"></a><figcaption>Type and colour</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-guide-business-card.webp"><img src="work/uplex-guide-business-card.webp" alt="Business card front and back" width="1000" height="1000" loading="lazy" decoding="async"></a><figcaption>Business card</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-guide-letterhead.webp"><img src="work/uplex-guide-letterhead.webp" alt="Letterhead" width="1000" height="1000" loading="lazy" decoding="async"></a><figcaption>Letterhead</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-guide-brochure.webp"><img src="work/uplex-guide-brochure.webp" alt="Inside of the services brochure" width="1000" height="1000" loading="lazy" decoding="async"></a><figcaption>Brochure</figcaption></figure>
+    </div>
+    <p class="art-label">From the campaign</p>
+    <div class="art-grid three">
       <figure class="art reveal"><a href="work/uplex-logo.webp"><img src="work/uplex-logo.webp" alt="Uplex &amp; Associates logo" width="720" height="540" loading="lazy" decoding="async"></a><figcaption>Identity</figcaption></figure>
-      <figure class="art reveal"><a href="work/uplex-speaker.webp"><img src="work/uplex-speaker.webp" alt="Masterclass poster" width="720" height="1019" loading="lazy" decoding="async"></a><figcaption>Masterclass poster</figcaption></figure>
       <figure class="art reveal"><a href="work/uplex-70pct.webp"><img src="work/uplex-70pct.webp" alt="70% of SMEs fail campaign post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Campaign post</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-ura.webp"><img src="work/uplex-ura.webp" alt="Can your business survive a URA audit post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Campaign post</figcaption></figure>
       <figure class="art reveal"><a href="work/uplex-21days.webp"><img src="work/uplex-21days.webp" alt="21 days to go countdown post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Countdown series</figcaption></figure>
-      <figure class="art reveal"><a href="work/uplex-concept.webp"><img src="work/uplex-concept.webp" alt="Concept note and sponsorship pack cover" width="720" height="1018" loading="lazy" decoding="async"></a><figcaption>Sponsorship pack</figcaption></figure>
-      <figure class="art reveal"><a href="work/uplex-intro.webp"><img src="work/uplex-intro.webp" alt="Masterclass details post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Masterclass details</figcaption></figure>
-      <figure class="art reveal"><a href="work/uplex-ura.webp"><img src="work/uplex-ura.webp" alt="Can your business survive a URA audit post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>URA audit post</figcaption></figure>
       <figure class="art reveal"><a href="work/uplex-ugandan.webp"><img src="work/uplex-ugandan.webp" alt="Designed for Ugandan SMEs post" width="720" height="900" loading="lazy" decoding="async"></a><figcaption>Positioning post</figcaption></figure>
+      <figure class="art reveal"><a href="work/uplex-concept.webp"><img src="work/uplex-concept.webp" alt="Concept note and sponsorship pack cover" width="720" height="1018" loading="lazy" decoding="async"></a><figcaption>Sponsorship pack</figcaption></figure>
     </div>
   </section>
 
@@ -675,12 +697,12 @@
       <p>As a creative director in real estate, at Ishita Properties and Spacious Homes, I scripted, directed, shot and edited luxury property films for YouTube and social media. At Meilin I made promos for the casino's games, and I made launch films for STACKD and Zawli, two products I designed and built. Tap any reel to play it right here.</p>
     </div>
     <div class="reels">
-      <figure class="reel reveal"><a href="https://drive.google.com/file/d/17DEPW9W4LVSRDntmp2NnPq6sNQ8jPy5q/view" aria-label="Play Luxury property walkthrough"><img src="work/reel-spacious.webp" alt="Modern house exterior" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Ishita Properties</b>Luxury property walkthrough</figcaption></figure>
-      <figure class="reel reveal"><a href="https://drive.google.com/file/d/19j5Sj7DjZhwAbU5fs7UIeiFVI0keuj4w/view" aria-label="Play Sweet Bonanza, a game promo"><img src="work/reel-sweetbonanza.webp" alt="Candy landscape from Sweet Bonanza" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>Sweet Bonanza, a game promo</figcaption></figure>
-      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1r1hHZGgNBa33jNp_zYAhEiG-WDOS_L22/view" aria-label="Play Aviator, a game promo"><img src="work/reel-aviator.webp" alt="Aviator game screen with a 1.10x multiplier" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>Aviator, a game promo</figcaption></figure>
-      <figure class="reel reveal"><a href="https://drive.google.com/file/d/1Re4yGDKqvAgSqICDWKguQnFIbBu9FbU1/view" aria-label="Play 40 Shining Crown, a game promo"><img src="work/reel-shiningcrown.webp" alt="40 Shining Crown slot reels" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>40 Shining Crown, a game promo</figcaption></figure>
-      <figure class="reel reveal"><a href="work/video/stackd-promo.mp4" data-shape="wide" aria-label="Play STACKD launch film"><img src="work/reel-stackd.webp" alt="STACKD app on a phone" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>STACKD</b>Product launch film</figcaption></figure>
-      <figure class="reel reveal"><a href="work/video/zawli-promo.mp4" data-shape="wide" aria-label="Play Zawli launch film"><img src="work/reel-zawli.webp" alt="Zawli guest menu on a phone" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Zawli</b>Product launch film</figcaption></figure>
+      <figure class="reel reveal"><a href="work/video/ishita.mp4" data-poster="work/video/ishita.jpg" aria-label="Play Luxury property walkthrough"><img src="work/reel-spacious.webp" alt="Modern house exterior" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Ishita Properties</b>Luxury property walkthrough</figcaption></figure>
+      <figure class="reel reveal"><a href="work/video/sweetbonanza.mp4" data-poster="work/video/sweetbonanza.jpg" aria-label="Play Sweet Bonanza, a game promo"><img src="work/reel-sweetbonanza.webp" alt="Candy landscape from Sweet Bonanza" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>Sweet Bonanza, a game promo</figcaption></figure>
+      <figure class="reel reveal"><a href="work/video/aviator.mp4" data-poster="work/video/aviator.jpg" aria-label="Play Aviator, a game promo"><img src="work/reel-aviator.webp" alt="Aviator game screen with a 1.10x multiplier" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>Aviator, a game promo</figcaption></figure>
+      <figure class="reel reveal"><a href="work/video/shiningcrown.mp4" data-poster="work/video/shiningcrown.jpg" aria-label="Play 40 Shining Crown, a game promo"><img src="work/reel-shiningcrown.webp" alt="40 Shining Crown slot reels" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Meilin International</b>40 Shining Crown, a game promo</figcaption></figure>
+      <figure class="reel reveal"><a href="work/video/stackd.mp4" data-poster="work/video/stackd.jpg" data-shape="wide" aria-label="Play STACKD launch film"><img src="work/reel-stackd.webp" alt="STACKD app on a phone" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>STACKD</b>Product launch film</figcaption></figure>
+      <figure class="reel reveal"><a href="work/video/zawli.mp4" data-poster="work/video/zawli.jpg" data-shape="wide" aria-label="Play Zawli launch film"><img src="work/reel-zawli.webp" alt="Zawli guest menu on a phone" width="360" height="640" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></a><figcaption><b>Zawli</b>Product launch film</figcaption></figure>
     </div>
   </section>
 
@@ -779,9 +801,16 @@
 </main>
 
 <dialog class="player" id="player" aria-label="Video player">
-  <button class="player-close" type="button" aria-label="Close video">&times;</button>
-  <div class="player-frame"><iframe title="Video" allow="autoplay; fullscreen" allowfullscreen></iframe><video controls playsinline preload="none" hidden></video></div>
-  <p class="player-caption"></p>
+  <div class="player-stage">
+    <div class="player-frame">
+      <video controls playsinline preload="metadata"></video>
+      <p class="player-loading" aria-hidden="true"><span>Loading video&hellip;</span></p>
+    </div>
+  </div>
+  <div class="player-bar">
+    <p class="player-caption"></p>
+    <button class="player-close" type="button" aria-label="Close video">&times;</button>
+  </div>
 </dialog>
 
 <script>
@@ -877,45 +906,59 @@
     }, { passive: true });
   })();
 
-  // Reels open in an on-page player instead of leaving for Google Drive.
+  // Reels open in an on-page player. The close button and caption hide while a video plays
+  // and come back on any tap, click, mouse move or key press.
   (function () {
     var player = document.getElementById("player");
     if (!player || typeof player.showModal !== "function") return;
-    var frame = player.querySelector("iframe"), video = player.querySelector("video"), caption = player.querySelector(".player-caption");
+    var video = player.querySelector("video"), caption = player.querySelector(".player-caption");
+    var timer = null, opener = null;
+    var showUi = function () {
+      player.classList.remove("idle");
+      clearTimeout(timer);
+      if (!video.paused) timer = setTimeout(function () { player.classList.add("idle"); }, 2500);
+    };
     var close = function () { player.close(); };
     document.querySelectorAll(".reel a").forEach(function (link) {
       link.addEventListener("click", function (e) {
         var href = link.getAttribute("href");
-        var id = (href.match(/\/d\/([^/]+)/) || [])[1];
-        var own = /\.mp4$/i.test(href);
-        if (!id && !own) return;
+        if (!/\.mp4$/i.test(href)) return;
         e.preventDefault();
+        opener = link;
         var fig = link.closest(".reel").querySelector("figcaption");
-        player.className = "player " + (link.dataset.shape === "wide" ? "wide" : "tall");
+        player.className = "player loading " + (link.dataset.shape === "wide" ? "wide" : "tall");
         caption.innerHTML = fig ? fig.innerHTML : "";
-        frame.hidden = own;
-        video.hidden = !own;
-        if (own) {
-          video.src = href;
-          video.setAttribute("aria-label", link.getAttribute("aria-label") || "Video");
-        } else {
-          frame.title = link.getAttribute("aria-label") || "Video";
-          frame.src = "https://drive.google.com/file/d/" + id + "/preview";
-        }
+        video.poster = link.dataset.poster || "";
+        video.src = href;
+        video.setAttribute("aria-label", link.getAttribute("aria-label") || "Video");
         document.documentElement.style.overflow = "hidden";
         player.showModal();
-        if (own) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+        showUi();
+        var p = video.play();
+        if (p && p.catch) p.catch(function () { player.classList.remove("loading"); showUi(); });
       });
     });
+    video.addEventListener("playing", function () { player.classList.remove("loading"); showUi(); });
+    video.addEventListener("waiting", function () { player.classList.add("loading"); });
+    video.addEventListener("canplay", function () { player.classList.remove("loading"); });
+    video.addEventListener("pause", function () { clearTimeout(timer); player.classList.remove("idle"); });
+    video.addEventListener("ended", function () { clearTimeout(timer); player.classList.remove("idle"); });
+    ["pointerdown", "pointermove", "keydown", "touchstart"].forEach(function (type) {
+      player.addEventListener(type, showUi, { passive: true });
+    });
     player.querySelector(".player-close").addEventListener("click", close);
-    // A click on the dimmed backdrop (outside the video) closes it too.
-    player.addEventListener("click", function (e) { if (e.target === player) close(); });
+    // A click on the dimmed area outside the video closes it too.
+    player.addEventListener("click", function (e) {
+      if (e.target === player || e.target.classList.contains("player-stage")) close();
+    });
     player.addEventListener("close", function () {
-      frame.src = "about:blank";
+      clearTimeout(timer);
       video.pause();
       video.removeAttribute("src");
+      video.removeAttribute("poster");
       video.load();
       document.documentElement.style.overflow = "";
+      if (opener) opener.focus();
     });
   })();
 </script>
